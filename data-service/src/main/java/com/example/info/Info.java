@@ -11,9 +11,15 @@ import org.springframework.stereotype.Component;
 class Info {
 
     private final String environment;
+    private final String podId;
+    private final String podNamespace;
+    private final String podIp;
 
     Info(AppProperties properties) {
         this.environment = properties.getEnvironment();
+        this.podId = properties.getPodId();
+        this.podNamespace = properties.getPodNamespace();
+        this.podIp = properties.getPodIp();
     }
 
 }

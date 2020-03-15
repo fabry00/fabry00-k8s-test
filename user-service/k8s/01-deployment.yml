@@ -27,8 +27,8 @@ spec:
         image: fabry/k8s-test-user-service:1.0.0
         resources:
           limits:
-            memory: 128M
-            cpu: ".2"
+            memory: 192M
+            cpu: ".3"
         livenessProbe:
             httpGet:
               path: /actuator/health

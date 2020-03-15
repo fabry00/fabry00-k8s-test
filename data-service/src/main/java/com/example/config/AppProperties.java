@@ -15,4 +15,13 @@ public class AppProperties {
 
     @NotNull
     private String environment;
+
+    @NotNull
+    private String podId;
+
+    @NotNull
+    private String podNamespace;
+
+    @NotNull
+    private String podIp;
 }
