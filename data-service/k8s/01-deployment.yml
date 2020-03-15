@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: data-service
+   labels:
+        app: k8s-test
+        tier: backend
+        type: data
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  minReadySeconds: 10
+  selector: 
+    matchLabels:
+      app: k8s-test
+      tier: backend
+      type: data
+  template:
+    metadata:
+      labels:
+        app: k8s-test
+        tier: backend
+        type: data
+    spec:
+      containers:
+      - name: data-service
+        image: fabry/k8s-test-data-service:1.0.0
+        resources:
+          limits:
+            memory: 128M
+            cpu: ".2"
+        livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 5
+            periodSeconds: 60
+            failureThreshold: 1

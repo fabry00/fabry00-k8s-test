@@ -1,0 +1,1 @@
+kubectl get pods -n=k8s-test-${1}
