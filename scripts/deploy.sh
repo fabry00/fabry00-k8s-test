@@ -10,4 +10,4 @@ kubectl apply -f ${DIR}/../data-service/k8s/02-service.yml -n=k8s-test-${1}
 
 # User service
 kubectl apply -f ${DIR}/../user-service/k8s/01-deployment.yml -n=k8s-test-${1}
-# kubectl apply -f ${DIR}/../user-service/k8s/02-service.yml -n=k8s-test-${1}
+kubectl apply -f ${DIR}/../user-service/k8s/02-service.yml -n=k8s-test-${1}
