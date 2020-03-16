@@ -1,18 +1,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-   name: todo-service
-   labels:
-        app: k8s-test
-        tier: backend
-        type: data
+  name: todo-service
+  labels:
+    app: k8s-test
+    tier: backend
+    type: data
 spec:
   type: NodePort
-  selector: 
+  selector:
     app: k8s-test
     tier: backend
     type: data
   ports:
-    - port: 9090
+    - port: 8080
       targetPort: 8080      
     

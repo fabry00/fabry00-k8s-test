@@ -14,3 +14,7 @@ kubectl apply -f ${DIR}/../services/todo-service/k8s/02-service.yml -n=k8s-test-
 # User service
 kubectl apply -f ${DIR}/../services/user-service/k8s/01-deployment.yml -n=k8s-test-${1}
 kubectl apply -f ${DIR}/../services/user-service/k8s/02-service.yml -n=k8s-test-${1}
+
+# Api Gateway service
+kubectl apply -f ${DIR}/../services/api-gateway-service/k8s/01-deployment.yml -n=k8s-test-${1}
+kubectl apply -f ${DIR}/../services/api-gateway-service/k8s/02-service.yml -n=k8s-test-${1}

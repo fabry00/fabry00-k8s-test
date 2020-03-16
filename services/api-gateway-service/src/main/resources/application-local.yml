@@ -1,0 +1,16 @@
+api:
+  gateway:
+    environment: none
+    pod-id: local
+    pod-namespace: local
+    pod-ip: local
+    services:
+      todo: "localhost:9090"
+      user: "localhost:9091"
+    endpoints:
+      - location: http://${api.gateway.services.todo}
+        method: GET
+        path: '[/]*api/todos.*'
+      - location: http://${api.gateway.services.user}
+        method: GET
+        path: '[/]*api/users.*'

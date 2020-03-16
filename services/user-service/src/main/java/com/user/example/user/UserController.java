@@ -1,18 +1,17 @@
 package com.user.example.user;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/api/users")
 public class UserController {
 
     private final UserService  userService;
 
-    @GetMapping("/user")
-    public User user(@RequestParam(value = "id") long id) {
+    @GetMapping("/{id}")
+    public User user(@PathVariable(value = "id") long id) {
         return userService.getUser(id);
     }
 }

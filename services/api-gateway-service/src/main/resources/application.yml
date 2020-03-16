@@ -1,0 +1,16 @@
+api:
+  gateway:
+    environment: none
+    pod-id: ${MY_POD_NAME:unknown}
+    pod-namespace: ${MY_POD_NAMESPACE:unknown}
+    pod-ip: ${MY_POD_ip:unknown}
+    services:
+      todo: ${TODO_SERVICE:todo-service:8080}
+      user: ${USER_SERVICE:user-service:8080}
+    endpoints:
+      - location: http://${api.gateway.services.todo}
+        method: GET
+        path: '[/]*api/todos.*'
+      - location: http://${api.gateway.services.user}
+        method: GET
+        path: '[/]*api/users.*'

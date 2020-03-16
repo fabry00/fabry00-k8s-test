@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-service
+  name: api-gateway-service
   labels:
     app: k8s-test
     tier: backend
-    type: data
+    type: api
 spec:
   replicas: 2
   revisionHistoryLimit: 2
@@ -14,17 +14,17 @@ spec:
     matchLabels:
       app: k8s-test
       tier: backend
-      type: data
+      type: api
   template:
     metadata:
       labels:
         app: k8s-test
         tier: backend
-        type: data
+        type: api
     spec:
       containers:
-        - name: todo-service
-          image: fabry/k8s-test-todo-service:1.0.8
+        - name: api-gateway-service
+          image: fabry/k8s-test-api-gateway-service:1.0.2
           resources:
             limits:
               memory: 192M
