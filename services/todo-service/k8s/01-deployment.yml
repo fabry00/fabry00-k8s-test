@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: data-service
+  name: todo-service
   labels:
     app: k8s-test
     tier: backend
@@ -23,8 +23,8 @@ spec:
         type: data
     spec:
       containers:
-        - name: data-service
-          image: fabry/k8s-test-data-service:1.0.6
+        - name: todo-service
+          image: fabry/k8s-test-todo-service:1.0.6
           resources:
             limits:
               memory: 192M

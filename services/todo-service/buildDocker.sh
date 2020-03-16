@@ -7,5 +7,5 @@ eval $(minikube -p minikube docker-env)
 
 # Build and create image
 ./mvnw package
-docker build -t "fabry/k8s-test-data-service:$1" --rm=true --force-rm=true .
-docker push "fabry/k8s-test-data-service:$1"
+docker build -t "fabry/k8s-test-todo-service:$1" --rm=true --force-rm=true .
+docker push "fabry/k8s-test-todo-service:$1"
