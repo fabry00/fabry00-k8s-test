@@ -1,4 +1,4 @@
-package com.example.todo;
+package com.user.example.user;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-public class TodoController {
+public class UserController {
 
-	private final TodoService todoService;
+    private final UserService  userService;
 
-	@GetMapping("/todo")
-	public Todo todo(@RequestParam(value = "id") long id) {
-		return todoService.getTodo(id);
-	}
+    @GetMapping("/user")
+    public User user(@RequestParam(value = "id") long id) {
+        return userService.getUser(id);
+    }
 }

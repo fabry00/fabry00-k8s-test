@@ -1,15 +1,15 @@
-package com.example.todo;
+package com.user.example.user;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class TodoService {
+public class UserService {
 
-    private final TodoRepository repo;
+    private final UserRepository repo;
 
-    public Todo getTodo(long id) {
+    public User getUser(long id) {
         return repo.get(id);
     }
 }

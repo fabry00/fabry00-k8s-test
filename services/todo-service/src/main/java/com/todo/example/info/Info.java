@@ -1,6 +1,6 @@
-package com.example.info;
+package com.todo.example.info;
 
-import com.example.config.AppProperties;
+import com.todo.example.config.AppProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.stereotype.Component;

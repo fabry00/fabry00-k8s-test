@@ -1,4 +1,4 @@
-package com.example.info;
+package com.user.example.info;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
