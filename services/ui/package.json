@@ -71,7 +71,7 @@
     "babel-core": "7.0.0-bridge.0"
   },
   "dependencies": {
-    "chalk": "2.4.2",
+    "chalk": "^2.4.2",
     "compression": "1.7.4",
     "connected-react-router": "6.5.0",
     "cross-env": "5.2.0",
@@ -187,7 +187,7 @@
     "react-test-renderer": "16.8.6",
     "redux-devtools-extension": "2.13.8",
     "rimraf": "2.6.3",
-    "shelljs": "0.8.3",
+    "shelljs": "^0.8.3",
     "style-loader": "0.23.1",
     "stylelint": "10.1.0",
     "stylelint-config-recommended": "2.2.0",

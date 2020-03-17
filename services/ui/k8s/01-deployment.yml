@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-service
+  name: ui
   labels:
     app: k8s-test
-    tier: backend
-    type: data
+    tier: frontend
+    type: app
 spec:
   replicas: 2
   revisionHistoryLimit: 2
@@ -13,26 +13,26 @@ spec:
   selector:
     matchLabels:
       app: k8s-test
-      tier: backend
-      type: data
+      tier: frontend
+      type: app
   template:
     metadata:
       labels:
         app: k8s-test
-        tier: backend
-        type: data
+        tier: frontend
+        type: app
     spec:
       containers:
-        - name: todo-service
-          image: fabry/k8s-test-todo-service:1.0.9
+        - name: ui
+          image: fabry/k8s-test-ui:1.0.1
           resources:
             limits:
-              memory: 192M
-              cpu: ".2"
+              memory: 64M
+              cpu: ".1"
           livenessProbe:
             httpGet:
-              path: /actuator/health
-              port: 8080
+              path: /
+              port: 3000
             initialDelaySeconds: 300
             timeoutSeconds: 5
             periodSeconds: 60
