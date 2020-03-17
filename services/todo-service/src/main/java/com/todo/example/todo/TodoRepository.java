@@ -2,23 +2,51 @@ package com.todo.example.todo;
 
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class TodoRepository {
 
-    private final Map<Long, Todo> todos = new HashMap<>();
+    // Should be immutable
+    private final Set<Todo> todos = new HashSet<>();
 
     TodoRepository() {
-        todos.put(1L, new Todo(1, "Todo 1"));
-        todos.put(2L, new Todo(2, "Todo 2"));
-        todos.put(3L, new Todo(3, "Todo 3"));
-        todos.put(4L, new Todo(4, "Todo 4"));
-        todos.put(5L, new Todo(5, "Todo 5"));
+        todos.add(new Todo(1, 1, "Todo 1", getRandomContent()));
+        todos.add(new Todo(2, 1, "Todo 2", getRandomContent()));
+        todos.add(new Todo(3, 1, "Todo 3", getRandomContent()));
+        todos.add(new Todo(4, 2, "Todo 4", getRandomContent()));
+        todos.add(new Todo(5, 3, "Todo 5", getRandomContent()));
     }
 
     Todo get(long id) {
-        return todos.get(id);
+        return todos
+                .stream()
+                .filter(todo -> todo.getId() == id)
+                .findFirst()
+                .orElse(null); // bleah!!!! Don't cate its a demo
+    }
+
+    Set<Todo> getAll(long userId) {
+        return todos
+                .stream()
+                .filter(todo -> todo.getUserId() == userId)
+                .collect(Collectors.toSet());
+    }
+
+    private static String getRandomContent() {
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+        return generatedString;
     }
 }

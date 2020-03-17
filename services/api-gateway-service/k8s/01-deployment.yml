@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: api-gateway-service
-          image: fabry/k8s-test-api-gateway-service:1.0.2
+          image: fabry/k8s-test-api-gateway-service:1.0.3
           resources:
             limits:
               memory: 192M
