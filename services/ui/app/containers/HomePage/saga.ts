@@ -13,11 +13,16 @@ import { makeSelectUsername } from 'containers/HomePage/selectors';
  * Github repos request/response handler
  */
 export function* getRepos() {
+
+  const url = process.env.API_URL || "/api";
+
   // Select username from store
   const userId = yield select(makeSelectUsername());
   // const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
-  const requestURL = `http://localhost:8080/api/todos/user/${userId}`;
+  const requestURL = `${url}/todos/user/${userId}`;
 
+  console.log("env", process.env);
+  console.log("URL TODOS: ", requestURL);
   try {
     // Call our request helper (see 'utils/request')
     const repos = yield call(request, requestURL);

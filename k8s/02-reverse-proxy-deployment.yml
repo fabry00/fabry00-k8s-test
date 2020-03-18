@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reverse-proxy
+  labels:
+    app: k8s-test
+    tier: service
+    type: proxy
+spec:
+  selector:
+    matchLabels:
+      app: k8s-test
+      tier: service
+      type: proxy
+  replicas: 2
+  revisionHistoryLimit: 2
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: k8s-test
+        tier: service
+        type: proxy
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.13.12-alpine
+          resources:
+              limits:
+                memory: 64M
+                cpu: ".1"   
+          volumeMounts:
+            - mountPath: /etc/nginx # mount nginx-conf volumn to /etc/nginx
+              readOnly: true
+              name: nginx-conf
+            # - mountPath: /var/log/nginx
+            #   name: log
+      volumes:
+        - name: nginx-conf
+          configMap:
+            name: reverse-proxy-conf # place ConfigMap `reverse-proxy-conf` on /etc/nginx
+            items:
+              - key: nginx.conf
+                path: nginx.conf 
+        # - name: log
+        #   emptyDir: {}

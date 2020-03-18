@@ -12,4 +12,6 @@ RUN apt-get install -y libgl1-mesa-dev
 COPY . .
 RUN npm install --unsafe-perm
 RUN npm run build
-CMD [ "npm", "run", "start:prod" ]
+# CMD [ "npm", "run", "start:prod" ]
+# Env set by kubernetes config map, default value: not_set
+ENTRYPOINT ["npm", "run", "start:prod" ]
