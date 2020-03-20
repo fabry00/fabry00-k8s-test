@@ -4,6 +4,7 @@ import com.gateway.example.config.ApiGatewayProperties;
 import com.gateway.example.gateway.utils.ContentRequestTransformer;
 import com.gateway.example.gateway.utils.HeadersRequestTransformer;
 import com.gateway.example.gateway.utils.URLRequestTransformer;
+import com.gateway.example.gateway.utils.UserAuth;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -27,6 +28,7 @@ import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.nonNull;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
@@ -34,10 +36,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 public class GatewayController {
 
     private final ApiGatewayProperties properties;
+    private final UserAuth userAuth;
     private HttpClient httpClient;
 
-    public GatewayController(ApiGatewayProperties properties) {
+    public GatewayController(ApiGatewayProperties properties, UserAuth userAuth) {
         this.properties = properties;
+        this.userAuth = userAuth;
 
         log.info("Endpoints: " + properties.getEndpoints());
     }
@@ -54,6 +58,10 @@ public class GatewayController {
     @RequestMapping(value = "/api/**", method = {GET, POST, DELETE})
     @ResponseBody
     public ResponseEntity<String> proxyRequest(HttpServletRequest request) throws IOException, URISyntaxException {
+        if (!userAuth.checkUserAuth(properties.getJwtSecret(), request)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
         HttpUriRequest proxiedRequest = createHttpUriRequest(request);
         log.info("request: {}", proxiedRequest);
         HttpResponse proxiedResponse = httpClient.execute(proxiedRequest);
@@ -64,7 +72,9 @@ public class GatewayController {
     private HttpHeaders makeResponseHeaders(HttpResponse response) {
         HttpHeaders result = new HttpHeaders();
         Header h = response.getFirstHeader("Content-Type");
-        result.set(h.getName(), h.getValue());
+        if (nonNull(h)) {
+            result.set(h.getName(), h.getValue());
+        }
         return result;
     }
 

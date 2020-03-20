@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui
+  labels:
+    app: k8s-test
+    tier: frontend
+    type: app
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  minReadySeconds: 10
+  selector:
+    matchLabels:
+      app: k8s-test
+      tier: frontend
+      type: app
+  template:
+    metadata:
+      labels:
+        app: k8s-test
+        tier: frontend
+        type: app
+    spec:
+      containers:
+        - name: ui
+          image: fabry/k8s-test-ui:1.0.4
+          resources:
+            limits:
+              memory: 64M
+              cpu: ".1"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 300
+            timeoutSeconds: 5
+            periodSeconds: 60
+            failureThreshold: 1
+          env:
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          envFrom:
+            - configMapRef:
+                name: k8s-test-configs

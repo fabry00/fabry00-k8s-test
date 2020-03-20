@@ -3,3 +3,4 @@ app:
   pod-id: ${MY_POD_NAME:unknown}
   pod-namespace: ${MY_POD_NAMESPACE:unknown}
   pod-ip: ${MY_POD_ip:unknown}
+  jwt-secret: ${JWT_SECRET}

@@ -1,18 +1,17 @@
 package com.user.example.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
+@AllArgsConstructor
 @EqualsAndHashCode
-class User {
+public class User {
 
     private final long id;
     private final String username;
+    private final String password;
 
-    User(long id, String username) {
-        this.id = id;
-        this.username = username;
-    }
 
 }

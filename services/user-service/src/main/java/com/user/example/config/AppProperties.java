@@ -24,4 +24,8 @@ public class AppProperties {
 
     @NotNull
     private String podIp;
+
+    @NotNull
+    private String jwtSecret;
+
 }

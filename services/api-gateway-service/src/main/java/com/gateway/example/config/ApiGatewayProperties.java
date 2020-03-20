@@ -28,51 +28,28 @@ public class ApiGatewayProperties {
     @NotNull
     private String podIp;
 
+    @NotNull
+    private Services services;
+
+    @NotNull
+    private String jwtSecret;
+
+    @NotNull
     private List<Endpoint> endpoints;
 
     @ToString
+    @Data
     public static class Endpoint {
         private String path;
         private RequestMethod method;
         private String location;
-
-        public Endpoint() {
-        }
-
-        public Endpoint(String location) {
-            this.location = location;
-        }
-
-        public String getPath() {
-            return path;
-        }
-
-        public void setPath(String path) {
-            this.path = path;
-        }
-
-        public RequestMethod getMethod() {
-            return method;
-        }
-
-        public void setMethod(RequestMethod method) {
-            this.method = method;
-        }
-
-        public String getLocation() {
-            return location;
-        }
-
-        public void setLocation(String location) {
-            this.location = location;
-        }
     }
 
-    public List<Endpoint> getEndpoints() {
-        return endpoints;
+    @Data
+    public static class Services {
+        private final String todo;
+        private final String user;
     }
 
-    public void setEndpoints(List<Endpoint> endpoints) {
-        this.endpoints = endpoints;
-    }
+
 }
