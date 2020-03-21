@@ -10,8 +10,9 @@ const selectRoute = (state: ApplicationRootState) => state.router;
 const makeSelectLocation = () =>
   createSelector(selectRoute, routeState => routeState.location);
 
+
 const makeSelectError = () =>
   createSelector(selectGlobal, globalState => globalState.error);
 
 
-export { makeSelectLocation, makeSelectError };
+export { makeSelectLocation, makeSelectError};

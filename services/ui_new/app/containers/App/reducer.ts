@@ -1,12 +1,11 @@
 import { ContainerState, ContainerActions } from './types';
 import ActionTypes from './constants';
 
+console.log("reducer.global");
 // The initial state of the App
 export const initialState: ContainerState = {
   loading: false,
   error: false,
-  userData: {
-  },
 };
 
 // // Take this container's state (as a slice of root state), this container's actions and return new state

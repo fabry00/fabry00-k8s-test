@@ -27,6 +27,16 @@ function loginReducer(
         ...state,
         password: action.payload,
       };
+    case ActionTypes.LOGIN_USER_ERROR:
+      return {
+        ...state,
+        error: true,
+      };
+    case ActionTypes.LOGIN_USER_SUSSESS:
+      return {
+        ...state,
+        error: false,
+      };
     default:
       return state;
   }

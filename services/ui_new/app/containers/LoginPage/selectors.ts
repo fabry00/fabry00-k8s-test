@@ -10,9 +10,15 @@ const makeSelectUsername = () =>
   createSelector(selectLogin, substate => {
     return substate.username;
   });
+
 const makeSelectPassword = () =>
   createSelector(selectLogin, substate => {
     return substate.password;
   });
 
-export { selectLogin, makeSelectUsername, makeSelectPassword };
+  const makeSelectError = () =>
+  createSelector(selectLogin, substate => {
+    return substate.error;
+  });
+
+export { selectLogin, makeSelectUsername, makeSelectPassword, makeSelectError };

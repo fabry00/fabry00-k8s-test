@@ -38,7 +38,7 @@ const stateSelector = createStructuredSelector({
 
 export default function HomePage() {
   const { repos, username, loading, error } = useSelector(stateSelector);
-
+console.log("######", process.env)
   const dispatch = useDispatch();
 
   // Not gonna declare event types here. No need. any is fine

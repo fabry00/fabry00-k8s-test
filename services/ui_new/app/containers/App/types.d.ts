@@ -7,13 +7,12 @@ import { ApplicationRootState } from '../../types';
 interface AppState {
   readonly loading: boolean;
   readonly error?: object | boolean;
-  readonly userData: UserData;
 }
 
-interface UserData {
-  //readonly repos?: Repo[];
+interface User {
+  id: number;
+  username: string;
 }
-
 
 /* --- ACTIONS --- */
 type AppActions = ActionType<typeof actions>;
@@ -25,4 +24,4 @@ type RootState = ApplicationRootState;
 type ContainerState = AppState;
 type ContainerActions = AppActions;
 
-export { RootState, ContainerState, ContainerActions, UserData };
+export { RootState, ContainerState, ContainerActions, User };
