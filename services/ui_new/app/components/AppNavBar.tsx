@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 
 export interface Props {
   currentPath: string;
+  onLogout(): void;
 }
 
 function AppNavBar(props: Props) {
@@ -21,6 +22,9 @@ function AppNavBar(props: Props) {
             Home
           </Nav.Link>
           <Nav.Link href="#profile">Profile</Nav.Link>
+        </Nav>
+        <Nav className="mr-sm-2">
+          <Nav.Link onClick={props.onLogout}>Logout</Nav.Link>
         </Nav>
       </NavBar.Collapse>
     </NavBar>

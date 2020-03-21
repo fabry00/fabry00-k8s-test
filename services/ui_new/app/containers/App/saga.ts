@@ -5,7 +5,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import ActionTypes from './constants';
 import request from 'utils/request';
-import { makeSelectJwt } from './selectors';
+import { makeSelectJwt, makeSelectUser } from './selectors';
 import { loadTodosSuccess, loadTodosError } from './actions';
 
 
@@ -18,10 +18,11 @@ export function* loadTodos() {
   // // and pacakge.json start task
   // // in prod default value will be used (injectect by webpack)
   const url = process.env.API_URL;
-  const requestURL = `${url}/todos/user/1`;
 
   // // Select username and password from store
   const jwt = yield select(makeSelectJwt());
+  const user = yield select(makeSelectUser());
+  const requestURL = `${url}/todos/user/${user.id}`;
 
   try {
     //   // Call our request helper (see 'utils/request')

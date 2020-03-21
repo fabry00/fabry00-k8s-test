@@ -1,6 +1,7 @@
 
 enum ActionTypes {
 
+  LOGOUT = 'myapp/App/LOGOUT',
   SET_JWT = 'myapp/App/SET_JWT',
 
   LOAD_TODOS = 'myapp/App/LOAD_TODOS',

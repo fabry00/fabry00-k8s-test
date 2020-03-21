@@ -25,6 +25,9 @@ const makeSelectJwt = () =>
 const makeSelectTodos = () =>
   createSelector(selectGlobal, globalState => globalState.todos);
 
+const makeSelectUser = () =>
+  createSelector(selectGlobal, globalState => globalState.user);
+
 
 export {
   makeSelectLocation,
@@ -32,5 +35,6 @@ export {
   makeSelectJwt,
   makeSelectIsLogged,
   makeSelectCurrentPath,
-  makeSelectTodos
+  makeSelectTodos,
+  makeSelectUser
 };

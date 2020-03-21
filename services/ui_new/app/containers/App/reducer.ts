@@ -12,13 +12,15 @@ export const initialState: ContainerState = {
   todos: []
 };
 
-// // Take this container's state (as a slice of root state), this container's actions and return new state
+// Take this container's state (as a slice of root state), this container's actions and return new state
 function appReducer(
   state: ContainerState = initialState,
   action: ContainerActions,
 ): ContainerState {
   console.log(`GlobalReducer - ${action.type}`)
   switch (action.type) {
+    case ActionTypes.LOGOUT:
+      return initialState;
     case ActionTypes.SET_JWT:
       return {
         ...state,
