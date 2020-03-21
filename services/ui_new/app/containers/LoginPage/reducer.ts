@@ -3,8 +3,8 @@ import { ContainerState, ContainerActions } from './types';
 
 // The initial state of the App
 export const initialState: ContainerState = {
-  username: 'user1',
-  password: 'pass1',
+  username: '',
+  password: '',
   error: false
 };
 
@@ -43,11 +43,7 @@ function loginReducer(
         error: true,
       };
     case ActionTypes.LOGIN_USER_SUSSESS:
-      return {
-        ...state,
-
-        error: false,
-      };
+      return initialState;
     default:
       return state;
   }
