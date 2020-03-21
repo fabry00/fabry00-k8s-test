@@ -6,7 +6,7 @@ console.log("reducer.global");
 export const initialState: ContainerState = {
   loading: false,
   error: false,
-  isLogged: false,
+  isLogged: true,
   jwt: ""
 };
 
