@@ -86,6 +86,7 @@
     "lodash": "4.17.14",
     "minimist": "1.2.0",
     "react": "16.8.6",
+    "react-bootstrap": "^1.0.0-beta.17",
     "react-dom": "16.8.6",
     "react-helmet": "6.0.0-beta",
     "react-intl": "2.9.0",

@@ -1,6 +1,5 @@
 import React from 'react';
-import AlertError from 'components/AlertError';
-
+import Alert from 'react-bootstrap/Alert';
 export interface Props {
   error: boolean;
 }
@@ -12,9 +11,9 @@ function ErrorContainer(props: Props) {
   }
   return (
     <div className="col-md-6">
-      <AlertError
-        message={"!! Wrong credentials !! Try again."}
-      ></AlertError>
+      <Alert variant="danger">
+        "!! Wrong credentials !! Try again."
+        </Alert>
     </div>
   );
 }

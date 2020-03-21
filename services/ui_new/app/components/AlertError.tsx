@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styles/styled-components';
 
+// DEPRECATED
 const AlertDiv = styled.div``;
 export interface Props {
   message: string;
