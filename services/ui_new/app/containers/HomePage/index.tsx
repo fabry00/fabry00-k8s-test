@@ -9,6 +9,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CenteredSection from 'components/CenteredSection';
+import HeaderRow from './components/HeaderRow';
+import TodosRow from './components/TodosRow';
 
 const stateSelector = createStructuredSelector({
   location: makeSelectLocation(),
@@ -21,15 +23,8 @@ export default function HomePage() {
     <div>
       <AppNavBar currentPath={currentPath}></AppNavBar>
       <Container>
-        <Row>
-          <Col>
-            <CenteredSection>
-              <h2>
-                <FormattedMessage {...messages.header} />
-              </h2>
-            </CenteredSection>
-          </Col>
-        </Row>
+        <HeaderRow></HeaderRow>
+        <TodosRow></TodosRow>
       </Container>
     </div>
   );
