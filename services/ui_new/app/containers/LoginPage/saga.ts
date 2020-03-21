@@ -13,7 +13,7 @@ import { push } from 'connected-react-router';
 
 
 export function* loginUser() {
-  console.log("URL",process.env.API_URL);
+  console.log("URL", process.env.API_URL);
 
 
   // ** IMPORTANT **
@@ -45,7 +45,7 @@ export function* loginUser() {
     };
     const response = yield call(request, requestURL, opts);
     yield put(loginSuccess(response));
-    yield put(setJwt(response.token));
+    yield put(setJwt(response.jwt, response.user));
     yield put(push('/'));
     yield put(loadTodos());
 

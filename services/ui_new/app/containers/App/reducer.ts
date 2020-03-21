@@ -8,6 +8,7 @@ export const initialState: ContainerState = {
   error: false,
   isLogged: false,
   jwt: "",
+  user: { id: -1, username: "" },
   todos: []
 };
 
@@ -22,7 +23,8 @@ function appReducer(
       return {
         ...state,
         isLogged: true,
-        jwt: action.payload
+        jwt: action.payload.token,
+        user: action.payload.user
       };
     case ActionTypes.LOAD_TODOS_SUSSESS:
       return {

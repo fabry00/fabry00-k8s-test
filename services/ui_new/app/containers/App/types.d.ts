@@ -9,6 +9,7 @@ interface AppState {
   readonly error: boolean;
   readonly isLogged: boolean;
   readonly jwt: string;
+  readonly user: User;
   readonly todos: Todo[];
 }
 

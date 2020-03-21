@@ -31,7 +31,7 @@ public class JwtAuthenticationController {
 
         if (userDetails.isPresent()) {
             final String token = jwtTokenUtil.generateToken(userDetails.get());
-            return ResponseEntity.ok(new JwtResponse(token));
+            return ResponseEntity.ok(new JwtResponse(token, userDetails.get()));
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ErrorLogin.builder()
