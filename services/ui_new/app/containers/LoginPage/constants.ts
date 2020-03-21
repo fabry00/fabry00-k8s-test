@@ -12,6 +12,7 @@
 enum ActionTypes {
   CHANGE_USERNAME = 'myapp/Login/CHANGE_USERNAME',
   CHANGE_PASSWORD = 'myapp/Login/CHANGE_PASSWORD',
+  RESET = 'myapp/Login/RESET',
   LOGIN_USER = 'myapp/App/LOGIN_USER',
   LOGIN_USER_ERROR = 'myapp/App/LOGIN_USER_ERROR',
   LOGIN_USER_SUSSESS = 'myapp/App/LOGIN_USER_SUSSESS',

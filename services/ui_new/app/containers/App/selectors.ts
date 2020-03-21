@@ -14,5 +14,8 @@ const makeSelectLocation = () =>
 const makeSelectError = () =>
   createSelector(selectGlobal, globalState => globalState.error);
 
+const makeSelectIsLogged = () =>
+  createSelector(selectGlobal, globalState => globalState.isLogged);
 
-export { makeSelectLocation, makeSelectError};
+
+export { makeSelectLocation, makeSelectError, makeSelectIsLogged};

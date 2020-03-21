@@ -10,7 +10,13 @@ function ErrorContainer(props: Props) {
   if (!props.error) {
     return null;
   }
-  return <AlertError></AlertError>;
+  return (
+    <div className="col-md-6">
+      <AlertError
+        message={"!! Wrong credentials !! Try again."}
+      ></AlertError>
+    </div>
+  );
 }
 
 export default ErrorContainer;

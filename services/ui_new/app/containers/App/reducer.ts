@@ -6,6 +6,7 @@ console.log("reducer.global");
 export const initialState: ContainerState = {
   loading: false,
   error: false,
+  isLogged: false
 };
 
 // // Take this container's state (as a slice of root state), this container's actions and return new state

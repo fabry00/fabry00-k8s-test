@@ -6,14 +6,13 @@ import {
   makeSelectUsername,
   makeSelectPassword,
 } from './selectors';
-import { changeUsername, changePassword } from './actions';
+import { changeUsername, changePassword, reset } from './actions';
 import { useInjectReducer } from 'utils/injectReducer';
 import reducer from './reducer';
 import { loginUser } from './actions';
 import saga from './saga';
 
 import LoginContainer from './components/LoginContainer';
-import ErrorLogin from './components/ErrorLogin';
 import { useInjectSaga } from 'utils/injectSaga';
 
 const key = 'login';
@@ -28,10 +27,9 @@ export default function LoginPage() {
   const { username, password, error } = useSelector(stateSelector);
   const dispatch = useDispatch();
 
-  const onChangeUsername = (evt: any) =>
-    dispatch(changeUsername(evt.target.value));
-  const onChangePassowrd = (evt: any) =>
-    dispatch(changePassword(evt.target.value));
+  const onChangeUsername = (evt: any) => dispatch(changeUsername(evt.target.value));
+  const onChangePassowrd = (evt: any) => dispatch(changePassword(evt.target.value));
+  const onReset = () => dispatch(reset());
 
   const onSubmitForm = (evt?: any) => {
     if (evt !== undefined && evt.preventDefault) {
@@ -63,64 +61,12 @@ export default function LoginPage() {
       <LoginContainer
         username={username}
         password={password}
+        error={error || false}
         onChangeUsername={onChangeUsername}
         onChangePassowrd={onChangePassowrd}
         onSubmitForm={onSubmitForm}
+        onReset={onReset}
       ></LoginContainer>
-      <ErrorLogin error={error || false}></ErrorLogin>
     </div>
   );
 }
-
-//   return (
-//     <div id="login">
-//       <h3 className="text-center text-white pt-5">Login form</h3>
-//       <div className="container">
-//         <div
-//           id="login-row"
-//           className="row justify-content-center align-items-center"
-//         >
-//           <div id="login-column" className="col-md-6">
-//             <div id="login-box" className="col-md-12">
-//               <Form className="form" onSubmit={onSubmitForm}>
-//                 <h3 className="text-center text-info">Login</h3>
-//                 <div className="form-group">
-//                   <label className="text-info">Username:</label>
-//                   <br />
-//                   <Input
-//                     id="loginUsername"
-//                     className="form-control"
-//                     type="text"
-//                     placeholder="username"
-//                     value={username}
-//                     onChange={onChangeUsername}
-//                   />
-//                 </div>
-//                 <div className="form-group">
-//                   <label className="text-info">Password:</label>
-//                   <br />
-//                   <Input
-//                     id="loginPassword"
-//                     className="form-control"
-//                     type="password"
-//                     placeholder="password"
-//                     value={password}
-//                     onChange={onChangePassowrd}
-//                   />
-//                 </div>
-//                 <div className="form-group text-right">
-//                   <input
-//                     type="submit"
-//                     name="submit"
-//                     className="btn btn-info btn-md"
-//                     value="submit"
-//                   />
-//                 </div>
-//               </Form>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }

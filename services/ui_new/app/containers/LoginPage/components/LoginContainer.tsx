@@ -1,18 +1,16 @@
-import React, { Children, ReactNode } from 'react';
-import styled from 'styles/styled-components';
+import React from 'react';
 import './login.css';
-import Form from 'components/Form';
-
-const Input = styled.input``;
-
+import ErrorLogin from './ErrorLogin';
+import FormLogin from './FormLogin';
 
 export interface Props {
-  children?: ReactNode;
   username: string;
   password: string;
+  error: boolean;
   onSubmitForm(): void;
+  onReset(): void;
   onChangeUsername(evt?: any): void;
-  onChangePassowrd(evt?: any):void;
+  onChangePassowrd(evt?: any): void;
 }
 
 function LoginContainer(props: Props) {
@@ -26,43 +24,17 @@ function LoginContainer(props: Props) {
         >
           <div id="login-column" className="col-md-6">
             <div id="login-box" className="col-md-12">
-              <Form className="form" onSubmit={props.onSubmitForm}>
-                <h3 className="text-center text-info">Login</h3>
-                <div className="form-group">
-                  <label className="text-info">Username:</label>
-                  <br />
-                  <Input
-                    id="loginUsername"
-                    className="form-control"
-                    type="text"
-                    placeholder="username"
-                    value={props.username}
-                    onChange={props.onChangeUsername}
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="text-info">Password:</label>
-                  <br />
-                  <Input
-                    id="loginPassword"
-                    className="form-control"
-                    type="password"
-                    placeholder="password"
-                    value={props.password}
-                    onChange={props.onChangePassowrd}
-                  />
-                </div>
-                <div className="form-group text-right">
-                  <input
-                    type="submit"
-                    name="submit"
-                    className="btn btn-info btn-md"
-                    value="submit"
-                  />
-                </div>
-              </Form>
+              <FormLogin
+                username={props.username}
+                password={props.password}
+                onChangeUsername={props.onChangeUsername}
+                onChangePassowrd={props.onChangePassowrd}
+                onSubmitForm={props.onSubmitForm}
+                onReset={props.onReset}
+              ></FormLogin>
             </div>
           </div>
+          <ErrorLogin error={props.error}></ErrorLogin>
         </div>
       </div>
     </div>
