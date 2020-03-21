@@ -1,7 +1,7 @@
 
 enum ActionTypes {
 
-  DO_ACTION = 'todo'
+  SET_JWT = 'myapp/App/SET_JWT',
   // LOGIN_USER = 'myapp/App/LOGIN_USER',
   // LOGIN_USER_ERROR = 'myapp/App/LOGIN_USER_ERROR',
   // LOGIN_USER_SUSSESS = 'myapp/App/LOGIN_USER_SUSSESS',

@@ -8,6 +8,9 @@ import ActionTypes from './constants';
 
 import request from 'utils/request';
 import { makeSelectUsername, makeSelectPassword } from 'containers/LoginPage/selectors';
+import { setJwt } from 'containers/App/actions';
+import { push } from 'connected-react-router';
+
 
 export function* loginUser() {
   console.log("URL",process.env.API_URL);
@@ -39,8 +42,9 @@ export function* loginUser() {
       referrerPolicy: 'no-referrer', // no-referrer, *client
       body: JSON.stringify({ username, password }) // body data type must match "Content-Type" header
     };
-    const user = yield call(request, requestURL, opts);
-    yield put(loginSuccess(user));
+    const response = yield call(request, requestURL, opts);
+    yield put(loginSuccess(response));
+    yield put(setJwt(response.token));
   } catch (err) {
     yield put(loginError());
   }

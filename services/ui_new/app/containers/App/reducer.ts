@@ -6,7 +6,8 @@ console.log("reducer.global");
 export const initialState: ContainerState = {
   loading: false,
   error: false,
-  isLogged: false
+  isLogged: false,
+  jwt: ""
 };
 
 // // Take this container's state (as a slice of root state), this container's actions and return new state
@@ -14,17 +15,14 @@ function appReducer(
   state: ContainerState = initialState,
   action: ContainerActions,
 ): ContainerState {
-  console.log(` - ${action.type}`)
+  console.log(`GlobalReducer - ${action.type}`)
   switch (action.type) {
-//     case ActionTypes.LOAD_REPOS:
-//       return {
-//         currentUser: state.currentUser,
-//         loading: true,
-//         error: false,
-//         userData: {
-//           repos: [],
-//         },
-//       };
+    case ActionTypes.SET_JWT:
+      return {
+        ...state,
+        isLogged: true,
+        jwt: action.payload
+      };
 //     case ActionTypes.LOAD_REPOS_SUCCESS:
 //       return {
 //         currentUser: action.payload.username,

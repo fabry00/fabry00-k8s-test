@@ -8,6 +8,7 @@ interface AppState {
   readonly loading: boolean;
   readonly error?: object | boolean;
   readonly isLogged: boolean;
+  readonly jwt: string;
 }
 
 interface User {
