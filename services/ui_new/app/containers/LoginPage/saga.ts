@@ -15,6 +15,7 @@ import { push } from 'connected-react-router';
 export function* loginUser() {
   console.log("URL",process.env.API_URL);
 
+
   // ** IMPORTANT **
   //Injected by webpack:
   // Check the file internal/webpack/webpack.base.babel.js
@@ -45,6 +46,7 @@ export function* loginUser() {
     const response = yield call(request, requestURL, opts);
     yield put(loginSuccess(response));
     yield put(setJwt(response.token));
+    yield put(push('/'));
   } catch (err) {
     yield put(loginError());
   }
