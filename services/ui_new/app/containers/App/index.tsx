@@ -18,12 +18,18 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import GlobalStyle from '../../global-styles';
 import { makeSelectIsLogged } from './selectors';
+import { useInjectSaga } from 'utils/injectSaga';
+import saga from './saga';
+
+const key = 'global';
 
 const stateSelector = createStructuredSelector({
   isLogged: makeSelectIsLogged(),
 });
 
 export default function App() {
+  useInjectSaga({ key: key, saga: saga });
+
   return (
     <div>
       <Switch>
@@ -40,7 +46,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   // Add your own authentication on the below line.
   // const isLoggedIn = false;
   const { isLogged } = useSelector(stateSelector);
-
   return (
     <Route
       {...rest}

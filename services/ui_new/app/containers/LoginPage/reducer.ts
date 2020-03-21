@@ -3,8 +3,8 @@ import { ContainerState, ContainerActions } from './types';
 
 // The initial state of the App
 export const initialState: ContainerState = {
-  username: '',
-  password: '',
+  username: 'user1',
+  password: 'pass1',
   error: false
 };
 

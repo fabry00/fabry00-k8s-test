@@ -13,12 +13,24 @@ const makeSelectLocation = () =>
 const makeSelectCurrentPath = () =>
   createSelector(selectRoute, routeState => routeState.location.pathname);
 
-
 const makeSelectError = () =>
   createSelector(selectGlobal, globalState => globalState.error);
 
 const makeSelectIsLogged = () =>
   createSelector(selectGlobal, globalState => globalState.isLogged);
 
+const makeSelectJwt = () =>
+  createSelector(selectGlobal, globalState => globalState.jwt);
 
-export { makeSelectLocation, makeSelectError, makeSelectIsLogged, makeSelectCurrentPath};
+const makeSelectTodos = () =>
+  createSelector(selectGlobal, globalState => globalState.todos);
+
+
+export {
+  makeSelectLocation,
+  makeSelectError,
+  makeSelectJwt,
+  makeSelectIsLogged,
+  makeSelectCurrentPath,
+  makeSelectTodos
+};

@@ -11,12 +11,7 @@ class Todo {
     private final long userId;
     private final String title;
     private final String content;
-
-    Todo(long id, long userId, String title, String content) {
-        this.id = id;
-        this.userId = userId;
-        this.title = title;
-        this.content = content;
-    }
+    private final long created;
+    private final long expiration;
 
 }

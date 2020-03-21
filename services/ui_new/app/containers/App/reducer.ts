@@ -6,8 +6,9 @@ console.log("reducer.global");
 export const initialState: ContainerState = {
   loading: false,
   error: false,
-  isLogged: true,
-  jwt: ""
+  isLogged: false,
+  jwt: "",
+  todos: []
 };
 
 // // Take this container's state (as a slice of root state), this container's actions and return new state
@@ -23,23 +24,33 @@ function appReducer(
         isLogged: true,
         jwt: action.payload
       };
-//     case ActionTypes.LOAD_REPOS_SUCCESS:
-//       return {
-//         currentUser: action.payload.username,
-//         loading: false,
-//         error: state.error,
-//         userData: {
-//           repos: action.payload.repos,
-//         },
-//       };
-//     case ActionTypes.LOAD_REPOS_ERROR:
+    case ActionTypes.LOAD_TODOS_SUSSESS:
+      return {
+        ...state,
+        todos: action.payload
+      };
+    case ActionTypes.LOAD_TODOS_ERROR:
+      return {
+        ...state,
+        error: true
+      };
+    //     case ActionTypes.LOAD_REPOS_SUCCESS:
+    //       return {
+    //         currentUser: action.payload.username,
+    //         loading: false,
+    //         error: state.error,
+    //         userData: {
+    //           repos: action.payload.repos,
+    //         },
+    //       };
+    //     case ActionTypes.LOAD_REPOS_ERROR:
 
-//       const { error, loading, ...rest } = state;
-//       return {
-//         error: action.payload,
-//         loading: false,
-//         ...rest,
-//       };
+    //       const { error, loading, ...rest } = state;
+    //       return {
+    //         error: action.payload,
+    //         loading: false,
+    //         ...rest,
+    //       };
     default:
       return state;
   }

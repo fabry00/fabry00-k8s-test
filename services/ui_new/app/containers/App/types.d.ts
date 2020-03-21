@@ -6,11 +6,20 @@ import { ApplicationRootState } from '../../types';
 
 interface AppState {
   readonly loading: boolean;
-  readonly error?: object | boolean;
+  readonly error: boolean;
   readonly isLogged: boolean;
   readonly jwt: string;
+  readonly todos: Todo[];
 }
 
+interface Todo {
+  id: number;
+  userId: number;
+  title: string;
+  content: string;
+  created: number;
+  expiration: number;
+}
 interface User {
   id: number;
   username: string;
@@ -26,4 +35,4 @@ type RootState = ApplicationRootState;
 type ContainerState = AppState;
 type ContainerActions = AppActions;
 
-export { RootState, ContainerState, ContainerActions, User };
+export { RootState, ContainerState, ContainerActions, User, Todo };

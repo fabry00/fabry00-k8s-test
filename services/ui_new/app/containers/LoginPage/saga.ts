@@ -8,7 +8,7 @@ import ActionTypes from './constants';
 
 import request from 'utils/request';
 import { makeSelectUsername, makeSelectPassword } from 'containers/LoginPage/selectors';
-import { setJwt } from 'containers/App/actions';
+import { setJwt, loadTodos } from 'containers/App/actions';
 import { push } from 'connected-react-router';
 
 
@@ -47,6 +47,8 @@ export function* loginUser() {
     yield put(loginSuccess(response));
     yield put(setJwt(response.token));
     yield put(push('/'));
+    yield put(loadTodos());
+
   } catch (err) {
     yield put(loginError());
   }
