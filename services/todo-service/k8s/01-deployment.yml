@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: todo-service
-          image: fabry/k8s-test-todo-service:1.0.9
+          image: fabry/k8s-test-todo-service:1.1.0
           resources:
             limits:
               memory: 192M

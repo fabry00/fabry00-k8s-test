@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.fluent.Request;
 import org.springframework.boot.actuate.health.Status;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class InfoService {
 
-    private HttpClient httpClient;
     private ApiGatewayProperties properties;
 
     Set<Info.ServiceHealth> getHealth() {
@@ -48,7 +46,7 @@ public class InfoService {
             e.printStackTrace();
         }
 
-        return new Info.ServiceHealth(service.getKey(), Status.UNKNOWN.toString());
+        return new Info.ServiceHealth(service.getKey(), Status.DOWN.toString());
     }
 
     private String responseToHealth(String response) {

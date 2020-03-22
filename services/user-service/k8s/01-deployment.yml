@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-   name: user-service
-   labels:
-        app: k8s-test
-        tier: backend
-        type: service
+  name: user-service
+  labels:
+    app: k8s-test
+    tier: backend
+    type: service
 spec:
   replicas: 2
   revisionHistoryLimit: 2
   minReadySeconds: 10
-  selector: 
+  selector:
     matchLabels:
       app: k8s-test
       tier: backend
@@ -23,13 +23,13 @@ spec:
         type: service
     spec:
       containers:
-      - name: user-service
-        image: fabry/k8s-test-user-service:1.0.3
-        resources:
-          limits:
-            memory: 192M
-            cpu: ".3"
-        livenessProbe:
+        - name: user-service
+          image: fabry/k8s-test-user-service:1.1.1
+          resources:
+            limits:
+              memory: 192M
+              cpu: ".2"
+          livenessProbe:
             httpGet:
               path: /actuator/health
               port: 8080
@@ -37,20 +37,20 @@ spec:
             timeoutSeconds: 5
             periodSeconds: 60
             failureThreshold: 1
-        env:
-          - name: MY_POD_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.name
-          - name: MY_POD_NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
-          - name: MY_POD_IP
-            valueFrom:
-              fieldRef:
-                fieldPath: status.podIP
-        envFrom:
-          - configMapRef:
-              name: k8s-test-configs
+          env:
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          envFrom:
+            - configMapRef:
+                name: k8s-test-configs
 

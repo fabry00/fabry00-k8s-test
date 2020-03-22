@@ -1,10 +1,12 @@
 package com.user.example.authenticaiton;
 
+import com.user.example.config.AppProperties;
 import com.user.example.user.User;
 import com.user.example.user.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,15 +19,19 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
+@Slf4j
 @RequestMapping("/api")
 public class JwtAuthenticationController {
     //private AuthenticationManager authenticationManager;
     private JwtTokenUtil jwtTokenUtil;
     private UserService userDetailsService;
+    private AppProperties properties;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-        //authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+
+        // Just for testing
+        log.info("JTW SECRET {}", properties.getJwtSecret());
         final Optional<User> userDetails = userDetailsService
                 .getUser(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
