@@ -5,4 +5,3 @@ metadata:
 data:
   # Configuration values can be set as key-value properties
   spring-profile: dev
-  JWT_SECRET: dfdgsfda

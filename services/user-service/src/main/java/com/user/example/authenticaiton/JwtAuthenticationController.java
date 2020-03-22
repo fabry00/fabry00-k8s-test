@@ -30,7 +30,7 @@ public class JwtAuthenticationController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
-        // Just for testing
+        // Just for testing. TODO delete the follogin log
         log.info("JTW SECRET {}", properties.getJwtSecret());
         final Optional<User> userDetails = userDetailsService
                 .getUser(authenticationRequest.getUsername(), authenticationRequest.getPassword());
