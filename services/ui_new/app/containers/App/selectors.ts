@@ -28,6 +28,15 @@ const makeSelectTodos = () =>
 const makeSelectUser = () =>
   createSelector(selectGlobal, globalState => globalState.user);
 
+const makeSelectShowHealth = () =>
+  createSelector(selectGlobal, substate => {
+    return substate.showHealth;
+  });
+
+const makeSelectInfo = () =>
+  createSelector(selectGlobal, substate => {
+    return substate.info;
+  });
 
 export {
   makeSelectLocation,
@@ -36,5 +45,7 @@ export {
   makeSelectIsLogged,
   makeSelectCurrentPath,
   makeSelectTodos,
-  makeSelectUser
+  makeSelectUser,
+  makeSelectShowHealth,
+  makeSelectInfo
 };

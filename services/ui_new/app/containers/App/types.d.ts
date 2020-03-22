@@ -11,6 +11,8 @@ interface AppState {
   readonly jwt: string;
   readonly user: User;
   readonly todos: Todo[];
+  readonly showHealth: boolean;
+  readonly info: Info;
 }
 
 interface Todo {
@@ -21,9 +23,23 @@ interface Todo {
   created: number;
   expiration: number;
 }
+
 interface User {
   id: number;
   username: string;
+}
+
+interface Info {
+  environment: string,
+  podId: string,
+  podNamespace: string,
+  podIp: string,
+  health: Health[]
+}
+
+interface Health {
+  name: string,
+  status: string
 }
 
 /* --- ACTIONS --- */
@@ -36,4 +52,4 @@ type RootState = ApplicationRootState;
 type ContainerState = AppState;
 type ContainerActions = AppActions;
 
-export { RootState, ContainerState, ContainerActions, User, Todo };
+export { RootState, ContainerState, ContainerActions, User, Todo, Info };

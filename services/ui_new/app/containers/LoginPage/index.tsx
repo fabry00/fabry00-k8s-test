@@ -14,22 +14,29 @@ import saga from './saga';
 
 import LoginContainer from './components/LoginContainer';
 import { useInjectSaga } from 'utils/injectSaga';
-
+import AppNavBarLogin from 'components/AppNavBarLogin';
+import HealthCheckModal from 'components/HealthCheckModal'
+import { makeSelectShowHealth, makeSelectInfo } from 'containers/App/selectors';
+import { closeHealth, showHealth } from 'containers/App/actions';
 const key = 'login';
 
 const stateSelector = createStructuredSelector({
   username: makeSelectUsername(),
   password: makeSelectPassword(),
   error: makeSelectError(),
+  showHealthModal: makeSelectShowHealth(),
+  info:makeSelectInfo(),
 });
 
 export default function LoginPage() {
-  const { username, password, error } = useSelector(stateSelector);
+  const { username, password, error, showHealthModal, info } = useSelector(stateSelector);
   const dispatch = useDispatch();
 
   const onChangeUsername = (evt: any) => dispatch(changeUsername(evt.target.value));
   const onChangePassowrd = (evt: any) => dispatch(changePassword(evt.target.value));
   const onReset = () => dispatch(reset());
+  const handleHealthShow = () => dispatch(showHealth());
+  const handleHealthClose = () => dispatch(closeHealth());
 
   const onSubmitForm = (evt?: any) => {
     if (evt !== undefined && evt.preventDefault) {
@@ -58,6 +65,9 @@ export default function LoginPage() {
 
   return (
     <div>
+      <AppNavBarLogin
+        handleShowHealth={handleHealthShow}
+      ></AppNavBarLogin>
       <LoginContainer
         username={username}
         password={password}
@@ -67,6 +77,11 @@ export default function LoginPage() {
         onSubmitForm={onSubmitForm}
         onReset={onReset}
       ></LoginContainer>
+      <HealthCheckModal
+       show={showHealthModal}
+       info={info}
+       handleClose={handleHealthClose}
+      ></HealthCheckModal>
     </div>
   );
 }

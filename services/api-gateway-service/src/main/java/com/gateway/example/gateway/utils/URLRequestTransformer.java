@@ -3,7 +3,6 @@ package com.gateway.example.gateway.utils;
 import com.gateway.example.config.ApiGatewayProperties;
 import lombok.AllArgsConstructor;
 import org.apache.http.client.methods.RequestBuilder;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
@@ -34,7 +33,7 @@ public class URLRequestTransformer extends ProxyRequestTransformer {
         ApiGatewayProperties.Endpoint endpoint =
                 apiGatewayProperties.getEndpoints().stream()
                         .filter(e ->
-                                requestURI.matches(e.getPath()) && e.getMethod() == RequestMethod.valueOf(httpServletRequest.getMethod())
+                                requestURI.matches(e.getPath())
                         )
                         .findFirst().orElseThrow(() -> new RuntimeException(httpServletRequest.toString()));
         return endpoint.getLocation() + requestURI;

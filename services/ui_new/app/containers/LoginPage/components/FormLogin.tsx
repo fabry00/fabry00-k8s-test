@@ -21,7 +21,7 @@ export interface Props {
 
 function FormLogin(props: Props) {
   return (
-    <Form className="form" onSubmit={props.onSubmitForm}>
+    <Form onSubmit={props.onSubmitForm}>
       <h3 className="text-center text-info">Login</h3>
       <div className="form-group">
         <label className="text-info">Username:</label>

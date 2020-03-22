@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class InfoController {
 
     private final Info info;
+    private final InfoService infoService;
 
-    @GetMapping("/info")
+    @GetMapping("/api/info")
     public Info info() {
+        info.setHealth(infoService.getHealth());
         return info;
     }
 }

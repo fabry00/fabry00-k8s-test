@@ -9,7 +9,9 @@ export const initialState: ContainerState = {
   isLogged: false,
   jwt: "",
   user: { id: -1, username: "" },
-  todos: []
+  todos: [],
+  showHealth: false,
+  info: { environment: "", podId: "", podIp: "", podNamespace: "", health: [] }
 };
 
 // Take this container's state (as a slice of root state), this container's actions and return new state
@@ -34,6 +36,27 @@ function appReducer(
         todos: action.payload
       };
     case ActionTypes.LOAD_TODOS_ERROR:
+      return {
+        ...state,
+        error: true
+      };
+    case ActionTypes.SHOW_HEALTH:
+      return {
+        ...state,
+        showHealth: true
+      };
+    case ActionTypes.CLOSE_HEALTH:
+      return {
+        ...state,
+        showHealth: false
+      };
+    case ActionTypes.FETCH_HEALTH_SUCCESS:
+      return {
+        ...state,
+        error: false,
+        info: action.payload
+      };
+    case ActionTypes.FETCH_HEALTH_ERROR:
       return {
         ...state,
         error: true

@@ -1,14 +1,16 @@
 package com.gateway.example.config;
 
+import com.google.common.collect.Maps;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Configuration
 @Primary
@@ -29,9 +31,6 @@ public class ApiGatewayProperties {
     private String podIp;
 
     @NotNull
-    private Services services;
-
-    @NotNull
     private String jwtSecret;
 
     @NotNull
@@ -41,14 +40,18 @@ public class ApiGatewayProperties {
     @Data
     public static class Endpoint {
         private String path;
-        private RequestMethod method;
         private String location;
+        private String name;
     }
 
-    @Data
-    public static class Services {
-        private final String todo;
-        private final String user;
+    public Map<String, String> getServicesList() {
+        return endpoints
+                .stream()
+                .map(endpoint -> Maps.immutableEntry(endpoint.name, endpoint.location))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (service1, service2) -> {
+                            return service1;
+                        }));
     }
 
 

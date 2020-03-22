@@ -10,8 +10,6 @@ import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,21 +36,22 @@ public class GatewayController {
     private final UserAuth userAuth;
     private HttpClient httpClient;
 
-    public GatewayController(ApiGatewayProperties properties, UserAuth userAuth) {
+    public GatewayController(ApiGatewayProperties properties, UserAuth userAuth, HttpClient httpClient) {
         this.properties = properties;
         this.userAuth = userAuth;
+        this.httpClient = httpClient;
 
         log.info("Endpoints: " + properties.getEndpoints());
     }
 
-    @PostConstruct
-    public void init() {
-        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
-
-        httpClient = HttpClients.custom()
-                .setConnectionManager(cm)
-                .build();
-    }
+//    @PostConstruct
+//    public void init() {
+//        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+//
+//        httpClient = HttpClients.custom()
+//                .setConnectionManager(cm)
+//                .build();
+//    }
 
     @RequestMapping(value = "/api/**", method = {GET, POST, DELETE})
     @ResponseBody

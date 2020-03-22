@@ -12,9 +12,10 @@ api:
       - location: http://${api.gateway.services.todo}
         method: GET
         path: '[/]*api/todos.*'
+        name: todo-service
       - location: http://${api.gateway.services.user}
-        method: GET
         path: '[/]*api/users.*'
+        name: user-service
       - location: http://${api.gateway.services.user}
-        method: POST
         path: '[/]*api/authenticate.*'
+        name: user-service

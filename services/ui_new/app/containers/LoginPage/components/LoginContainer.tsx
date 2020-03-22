@@ -3,6 +3,7 @@ import './login.css';
 import ErrorLogin from './ErrorLogin';
 import FormLogin from './FormLogin';
 
+
 export interface Props {
   username: string;
   password: string;
@@ -16,7 +17,6 @@ export interface Props {
 function LoginContainer(props: Props) {
   return (
     <div id="login">
-      <h3 className="text-center text-white pt-5">Login form</h3>
       <div className="container">
         <div
           id="login-row"

@@ -1,5 +1,8 @@
 package com.gateway.example.config;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -32,5 +35,14 @@ public class ApiConfig {
                 registry.addMapping("/**");
             }
         };
+    }
+
+    @Bean
+    public HttpClient httpClient() {
+        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+
+        return HttpClients.custom()
+                .setConnectionManager(cm)
+                .build();
     }
 }

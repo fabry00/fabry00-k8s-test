@@ -20,6 +20,7 @@ import GlobalStyle from '../../global-styles';
 import { makeSelectIsLogged } from './selectors';
 import { useInjectSaga } from 'utils/injectSaga';
 import saga from './saga';
+import { fetchHealth } from './actions';
 
 const key = 'global';
 
@@ -29,6 +30,9 @@ const stateSelector = createStructuredSelector({
 
 export default function App() {
   useInjectSaga({ key: key, saga: saga });
+
+  const dispatch = useDispatch();
+  setTimeout(() => dispatch(fetchHealth()), 100);
 
   return (
     <div>

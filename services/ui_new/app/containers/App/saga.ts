@@ -6,8 +6,7 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import ActionTypes from './constants';
 import request from 'utils/request';
 import { makeSelectJwt, makeSelectUser } from './selectors';
-import { loadTodosSuccess, loadTodosError } from './actions';
-
+import { loadTodosSuccess, loadTodosError, fetchHealthSuccess, fetchHealthError } from './actions';
 
 export function* loadTodos() {
   console.log("loadTodos", process.env.API_URL);
@@ -40,13 +39,32 @@ export function* loadTodos() {
   }
 }
 
+export function* fetchHealth() {
+
+  console.log("fetchHealth", process.env.API_URL);
+
+  const url = process.env.API_URL;
+
+  const requestURL = `${url}/info`;
+
+  try {
+    const response = yield call(request, requestURL);
+    yield put(fetchHealthSuccess(response));
+  } catch (err) {
+    yield put(fetchHealthError());
+  }
+}
+
+
 /**
  * Root saga manages watcher lifecycle
  */
-export default function* doLoadTodos() {
+export default function* doLoadSaga() {
   // Watches for LOGIN_USER actions and calls getRepos when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
   yield takeLatest(ActionTypes.LOAD_TODOS, loadTodos);
+
+  yield takeLatest(ActionTypes.FETCH_HEALTH, fetchHealth);
 }
