@@ -44,24 +44,16 @@ public class GatewayController {
         log.info("Endpoints: " + properties.getEndpoints());
     }
 
-//    @PostConstruct
-//    public void init() {
-//        PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
-//
-//        httpClient = HttpClients.custom()
-//                .setConnectionManager(cm)
-//                .build();
-//    }
-
     @RequestMapping(value = "/api/**", method = {GET, POST, DELETE})
     @ResponseBody
     public ResponseEntity<String> proxyRequest(HttpServletRequest request) throws IOException, URISyntaxException {
+        log.info("proxyRequest: {}", request.getPathInfo());
         if (!userAuth.checkUserAuth(properties.getJwtSecret(), request)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         HttpUriRequest proxiedRequest = createHttpUriRequest(request);
-        log.info("request: {}", proxiedRequest);
+        log.info("Request: {}", proxiedRequest);
         HttpResponse proxiedResponse = httpClient.execute(proxiedRequest);
         log.info("Response {}", proxiedResponse.getStatusLine().getStatusCode());
         return new ResponseEntity<>(read(proxiedResponse.getEntity().getContent()), makeResponseHeaders(proxiedResponse), HttpStatus.valueOf(proxiedResponse.getStatusLine().getStatusCode()));

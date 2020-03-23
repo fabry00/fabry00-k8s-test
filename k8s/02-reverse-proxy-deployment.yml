@@ -24,13 +24,13 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.13.12-alpine
+          image: bitnami/nginx:1.14.2
           resources:
               limits:
                 memory: 64M
                 cpu: ".1"   
           volumeMounts:
-            - mountPath: /etc/nginx # mount nginx-conf volumn to /etc/nginx
+            - mountPath: /opt/bitnami/nginx/conf/ # mount nginx-conf volumn to /etc/nginx
               readOnly: true
               name: nginx-conf
             - mountPath: /var/log/nginx
