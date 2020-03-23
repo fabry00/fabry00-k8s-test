@@ -28,8 +28,8 @@ function* testSaga() {
 jest.mock('../sagaInjectors');
 describe('injectSaga decorator', () => {
   let store: InjectedStore;
-  let injectors: /*typeof getInjectors*/ any;
-  let ComponentWithSaga;
+  let injectors/*: ReturnType<typeof getInjectors>*/;
+  let ComponentWithSaga/*: ComponentType<unknown>*/;
 
   beforeAll(() => {
     const mockedGetInjectors = (getInjectors as unknown) as jest.Mock<
@@ -98,7 +98,6 @@ describe('injectSaga decorator', () => {
       </Provider>,
     )
       .getInstance()!;
-
     const {
       props: { children },
     } = renderedComponent;
@@ -107,7 +106,7 @@ describe('injectSaga decorator', () => {
 });
 
 describe('useInjectSaga hook', () => {
-  let store;
+  let store: InjectedStore;
   let injectors;
   let ComponentWithSaga;
 

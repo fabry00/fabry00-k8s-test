@@ -1,16 +1,18 @@
-/*
- * AppConstants
- * Each action has a corresponding type, which the reducer knows and picks up on.
- * To avoid weird typos between the reducer and the actions, we save them as
- * constants here. We prefix them with 'yourproject/YourComponent' so we avoid
- * reducers accidentally picking up actions they shouldn't.
- *
- */
 
 enum ActionTypes {
-  LOAD_REPOS = 'boilerplate/App/LOAD_REPOS',
-  LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS',
-  LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR',
+
+  LOGOUT = 'myapp/App/LOGOUT',
+  SET_JWT = 'myapp/App/SET_JWT',
+
+  LOAD_TODOS = 'myapp/App/LOAD_TODOS',
+  LOAD_TODOS_SUSSESS = 'myapp/App/LOAD_TODOS_SUSSESS',
+  LOAD_TODOS_ERROR = 'myapp/App/LOAD_TODOS_ERROR',
+
+  SHOW_HEALTH = 'myapp/App/SHOW_HEALTH',
+  CLOSE_HEALTH = 'myapp/App/CLOSE_HEALTH',
+  FETCH_HEALTH = 'myapp/App/FETCH_HEALTH',
+  FETCH_HEALTH_SUCCESS = 'myapp/App/FETCH_HEALTH_SUCCESS',
+  FETCH_HEALTH_ERROR = 'myapp/App/FETCH_HEALTH_ERROR',
 }
 
 export default ActionTypes;

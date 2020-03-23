@@ -120,6 +120,7 @@ module.exports = options => ({
     // drop any unreachable code.
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
+      API_URL: '/api'
     }),
     new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
   ]),

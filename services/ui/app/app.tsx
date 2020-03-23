@@ -17,6 +17,8 @@ import FontFaceObserver from 'fontfaceobserver';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 // Import root app
 import App from 'containers/App';
 

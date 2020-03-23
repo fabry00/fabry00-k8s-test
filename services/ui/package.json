@@ -22,7 +22,7 @@
     "prebuild": "npm run build:clean",
     "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
     "build:clean": "rimraf ./build",
-    "start": "cross-env NODE_ENV=development API_URL=http://localhost:8080 node server",
+    "start": "cross-env NODE_ENV=development API_URL=http://localhost:8080/api node server",
     "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
     "start:production": "npm run test && npm run build && npm run start:prod",
     "start:prod": "cross-env NODE_ENV=production node server",
@@ -71,6 +71,7 @@
     "babel-core": "7.0.0-bridge.0"
   },
   "dependencies": {
+    "bootstrap": "^4.4.1",
     "chalk": "^2.4.2",
     "compression": "1.7.4",
     "connected-react-router": "6.5.0",
@@ -84,7 +85,10 @@
     "ip": "1.1.5",
     "lodash": "4.17.14",
     "minimist": "1.2.0",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.28",
     "react": "16.8.6",
+    "react-bootstrap": "^1.0.0-beta.17",
     "react-dom": "16.8.6",
     "react-helmet": "6.0.0-beta",
     "react-intl": "2.9.0",

@@ -1,50 +1,67 @@
 /**
  *
- * App
+ * App.js
  *
  * This component is the skeleton around the actual pages, and should only
  * contain code that should be seen on all pages. (e.g. navigation bar)
+ *
  */
 
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
-import styled from 'styles/styled-components';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
+import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+import { createStructuredSelector } from 'reselect';
+import { useDispatch, useSelector } from 'react-redux';
 
 import GlobalStyle from '../../global-styles';
+import { makeSelectIsLogged } from './selectors';
+import { useInjectSaga } from 'utils/injectSaga';
+import saga from './saga';
+import { fetchHealth } from './actions';
 
-const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
-  margin: 0 auto;
-  display: flex;
-  min-height: 100%;
-  padding: 0 16px;
-  flex-direction: column;
-`;
+const key = 'global';
+
+const stateSelector = createStructuredSelector({
+  isLogged: makeSelectIsLogged(),
+});
 
 export default function App() {
+  useInjectSaga({ key: key, saga: saga });
+
+  const dispatch = useDispatch();
+  setTimeout(() => dispatch(fetchHealth()), 100);
+
   return (
-    <AppWrapper>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta name="description" content="A React.js Boilerplate application" />
-      </Helmet>
-      <Header />
+    <div>
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/features" component={FeaturePage} />
-        <Route path="" component={NotFoundPage} />
+        <Route path="/login" component={LoginPage} />
+        <PrivateRoute path="/" component={HomePage} />
+        <Route component={NotFoundPage} />
       </Switch>
-      <Footer />
       <GlobalStyle />
-    </AppWrapper>
+    </div>
   );
 }
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  // Add your own authentication on the below line.
+  // const isLoggedIn = false;
+  const { isLogged } = useSelector(stateSelector);
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        isLogged ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: '/login', state: { from: props.location } }}
+          />
+        )
+      }
+    />
+  );
+};
