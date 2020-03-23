@@ -1,4 +1,4 @@
-package com.gateway.example.gateway.utils;
+package com.gateway.example.gateway.utils.jwt;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import static java.util.Objects.isNull;
 
-@Component
 @AllArgsConstructor
+@Component
 @Slf4j
 public class UserAuth {
 
-    private final JwtTokenUtil tokenUtil;
+    private final TokenVerifier tokenVerifier;
 
     public boolean checkUserAuth(String jwtSecret, HttpServletRequest request) {
         if (request.getRequestURI().contains("/api/authenticate")) {
@@ -28,11 +28,8 @@ public class UserAuth {
             return false;
         }
         String token = authHeader.replace("Bearer ", "");
-        log.info("User from JWT: " + tokenUtil.getUsernameFromToken(token));
-        log.info("Expiration JWT: " + tokenUtil.getExpirationDateFromToken(token));
-
-        boolean isTokenValid = tokenUtil.validateToken(token);
-        log.info("JWT valid: " + isTokenValid);
-        return isTokenValid;
+        return tokenVerifier.verifyToken(token);
     }
+
+
 }

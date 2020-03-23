@@ -34,7 +34,17 @@ public class ApiGatewayProperties {
     private String jwtSecret;
 
     @NotNull
+    private Cache cache;
+
+    @NotNull
     private List<Endpoint> endpoints;
+
+    @ToString
+    @Data
+    public static class Cache {
+        private int maxValues;
+        private int ttlMinutes;
+    }
 
     @ToString
     @Data

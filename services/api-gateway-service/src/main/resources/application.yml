@@ -4,7 +4,9 @@ api:
     pod-id: ${MY_POD_NAME:unknown}
     pod-namespace: ${MY_POD_NAMESPACE:unknown}
     pod-ip: ${MY_POD_ip:unknown}
-    jwt-secret: ${JWT_SECRET}
+    cache:
+      max-values: 1000
+      ttl-minutes: 30
     services:
       todo: ${TODO_SERVICE:todo-service:8080}
       user: ${USER_SERVICE:user-service:8080}

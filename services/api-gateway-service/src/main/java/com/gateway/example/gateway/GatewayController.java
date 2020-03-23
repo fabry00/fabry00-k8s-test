@@ -4,7 +4,7 @@ import com.gateway.example.config.ApiGatewayProperties;
 import com.gateway.example.gateway.utils.ContentRequestTransformer;
 import com.gateway.example.gateway.utils.HeadersRequestTransformer;
 import com.gateway.example.gateway.utils.URLRequestTransformer;
-import com.gateway.example.gateway.utils.UserAuth;
+import com.gateway.example.gateway.utils.jwt.UserAuth;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -47,7 +47,7 @@ public class GatewayController {
     @RequestMapping(value = "/api/**", method = {GET, POST, DELETE})
     @ResponseBody
     public ResponseEntity<String> proxyRequest(HttpServletRequest request) throws IOException, URISyntaxException {
-        log.info("proxyRequest: {}", request.getPathInfo());
+        log.info("proxyRequest: {}", request.getRequestURI());
         if (!userAuth.checkUserAuth(properties.getJwtSecret(), request)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

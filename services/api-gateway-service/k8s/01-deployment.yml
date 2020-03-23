@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: api-gateway-service
-          image: fabry/k8s-test-api-gateway-service:1.1.1
+          image: fabry/k8s-test-api-gateway-service:1.1.2
           resources:
             limits:
               memory: 192M
@@ -50,11 +50,6 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-            - name: JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: k8s-test-secrets
-                  key: JWT_SECRET
           envFrom:
             - configMapRef:
                 name: k8s-test-configs

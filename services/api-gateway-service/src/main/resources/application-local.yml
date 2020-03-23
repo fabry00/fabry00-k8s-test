@@ -4,7 +4,9 @@ api:
     pod-id: local
     pod-namespace: local
     pod-ip: local
-    jwt-secret: secret
+    cache:
+      max-values: 1000
+      ttl-minutes: 30
     services:
       todo: "localhost:9090"
       user: "localhost:9091"
