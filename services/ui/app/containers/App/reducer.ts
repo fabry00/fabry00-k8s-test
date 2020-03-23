@@ -4,7 +4,7 @@ import ActionTypes from './constants';
 console.log("reducer.global");
 // The initial state of the App
 export const initialState: ContainerState = {
-  loading: false,
+  loading: 0,
   error: false,
   isLogged: false,
   jwt: "",
@@ -21,6 +21,11 @@ function appReducer(
 ): ContainerState {
   console.log(`GlobalReducer - ${action.type}`)
   switch (action.type) {
+    case ActionTypes.SHOW_LOADING:
+      return {
+        ...state,
+        loading: (action.payload) ?state.loading +1 : state.loading -1
+      };
     case ActionTypes.LOGOUT:
       return initialState;
     case ActionTypes.SET_JWT:

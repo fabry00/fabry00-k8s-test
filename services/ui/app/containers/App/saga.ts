@@ -6,10 +6,12 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import ActionTypes from './constants';
 import request from 'utils/request';
 import { makeSelectJwt, makeSelectUser } from './selectors';
-import { loadTodosSuccess, loadTodosError, fetchHealthSuccess, fetchHealthError } from './actions';
+import { loadTodosSuccess, loadTodosError, fetchHealthSuccess, fetchHealthError, showLoading } from './actions';
 
 export function* loadTodos() {
   console.log("loadTodos", process.env.API_URL);
+
+  yield put(showLoading(true));
 
   // // ** IMPORTANT **
   // //Injected by webpack:
@@ -37,11 +39,15 @@ export function* loadTodos() {
   } catch (err) {
     yield put(loadTodosError());
   }
+
+  yield put(showLoading(false));
 }
 
 export function* fetchHealth() {
 
   console.log("fetchHealth", process.env.API_URL);
+
+  yield put(showLoading(true));
 
   const url = process.env.API_URL;
 
@@ -53,6 +59,8 @@ export function* fetchHealth() {
   } catch (err) {
     yield put(fetchHealthError());
   }
+
+  yield put(showLoading(false));
 }
 
 

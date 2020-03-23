@@ -5,7 +5,7 @@ import { ApplicationRootState } from '../../types';
 /* --- STATE --- */
 
 interface AppState {
-  readonly loading: boolean;
+  readonly loading: number;
   readonly error: boolean;
   readonly isLogged: boolean;
   readonly jwt: string;

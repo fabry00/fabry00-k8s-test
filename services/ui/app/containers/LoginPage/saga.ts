@@ -8,13 +8,14 @@ import ActionTypes from './constants';
 
 import request from 'utils/request';
 import { makeSelectUsername, makeSelectPassword } from 'containers/LoginPage/selectors';
-import { setJwt, loadTodos } from 'containers/App/actions';
+import { setJwt, loadTodos, showLoading } from 'containers/App/actions';
 import { push } from 'connected-react-router';
 
 
 export function* loginUser() {
   console.log("URL", process.env.API_URL);
 
+  yield put(showLoading(true));
 
   // ** IMPORTANT **
   //Injected by webpack:
@@ -52,6 +53,8 @@ export function* loginUser() {
   } catch (err) {
     yield put(loginError());
   }
+
+  yield put(showLoading(false));
 }
 
 /**

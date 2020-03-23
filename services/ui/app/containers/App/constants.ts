@@ -13,6 +13,8 @@ enum ActionTypes {
   FETCH_HEALTH = 'myapp/App/FETCH_HEALTH',
   FETCH_HEALTH_SUCCESS = 'myapp/App/FETCH_HEALTH_SUCCESS',
   FETCH_HEALTH_ERROR = 'myapp/App/FETCH_HEALTH_ERROR',
+
+  SHOW_LOADING = 'myapp/App/SHOW_LOADING',
 }
 
 export default ActionTypes;

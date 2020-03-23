@@ -16,8 +16,9 @@ import LoginContainer from './components/LoginContainer';
 import { useInjectSaga } from 'utils/injectSaga';
 import AppNavBarLogin from 'components/AppNavBarLogin';
 import HealthCheckModal from 'components/HealthCheckModal'
-import { makeSelectShowHealth, makeSelectInfo } from 'containers/App/selectors';
+import { makeSelectShowHealth, makeSelectInfo, makeSelectLoading } from 'containers/App/selectors';
 import { closeHealth, showHealth } from 'containers/App/actions';
+import LoadingIndicator from 'components/LoadingIndicator';
 const key = 'login';
 
 const stateSelector = createStructuredSelector({
@@ -26,10 +27,11 @@ const stateSelector = createStructuredSelector({
   error: makeSelectError(),
   showHealthModal: makeSelectShowHealth(),
   info:makeSelectInfo(),
+  showIndicator: makeSelectLoading(),
 });
 
 export default function LoginPage() {
-  const { username, password, error, showHealthModal, info } = useSelector(stateSelector);
+  const { username, password, error, showHealthModal, info, showIndicator } = useSelector(stateSelector);
   const dispatch = useDispatch();
 
   const onChangeUsername = (evt: any) => dispatch(changeUsername(evt.target.value));
@@ -77,6 +79,7 @@ export default function LoginPage() {
         onSubmitForm={onSubmitForm}
         onReset={onReset}
       ></LoginContainer>
+      <LoadingIndicator show={showIndicator}></LoadingIndicator>
       <HealthCheckModal
        show={showHealthModal}
        info={info}

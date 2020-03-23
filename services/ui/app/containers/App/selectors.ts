@@ -38,6 +38,11 @@ const makeSelectInfo = () =>
     return substate.info;
   });
 
+const makeSelectLoading = () =>
+  createSelector(selectGlobal, substate => {
+    return substate.loading;
+  });
+
 export {
   makeSelectLocation,
   makeSelectError,
@@ -47,5 +52,6 @@ export {
   makeSelectTodos,
   makeSelectUser,
   makeSelectShowHealth,
-  makeSelectInfo
+  makeSelectInfo,
+  makeSelectLoading
 };

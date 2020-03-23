@@ -14,3 +14,5 @@ export const fetchHealthSuccess = (health: Info) => action(ActionTypes.FETCH_HEA
 export const fetchHealthError = () => action(ActionTypes.FETCH_HEALTH_ERROR);
 export const showHealth = () => action(ActionTypes.SHOW_HEALTH);
 export const closeHealth = () => action(ActionTypes.CLOSE_HEALTH);
+
+export const showLoading = (show: boolean) => action(ActionTypes.SHOW_LOADING, show);

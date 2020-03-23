@@ -6,6 +6,7 @@ import {
   makeSelectError,
   makeSelectShowHealth,
   makeSelectInfo,
+  makeSelectLoading,
 } from 'containers/App/selectors';
 import { createStructuredSelector } from 'reselect';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,6 +16,7 @@ import TodosRow from './components/TodosRow';
 import ErrorRow from './components/ErrorRow';
 import { logoutUser, showHealth, closeHealth } from 'containers/App/actions';
 import HealthCheckModal from 'components/HealthCheckModal';
+import LoadingIndicator from 'components/LoadingIndicator';
 
 const stateSelector = createStructuredSelector({
   location: makeSelectLocation(),
@@ -22,10 +24,11 @@ const stateSelector = createStructuredSelector({
   error: makeSelectError(),
   showHealthModal: makeSelectShowHealth(),
   info: makeSelectInfo(),
+  showIndicator: makeSelectLoading(),
 });
 
 export default function HomePage() {
-  const { location, todos, error, showHealthModal, info } = useSelector(
+  const { location, todos, error, showHealthModal, info, showIndicator } = useSelector(
     stateSelector,
   );
   const currentPath = location.pathname === '/' ? '/home' : location.pathname;
@@ -46,6 +49,7 @@ export default function HomePage() {
       ></AppNavBar>
       <Container>
         <HeaderRow></HeaderRow>
+        <LoadingIndicator show={showIndicator}></LoadingIndicator>
         <TodosRow todos={todos}></TodosRow>
         <ErrorRow error={error}></ErrorRow>
       </Container>
