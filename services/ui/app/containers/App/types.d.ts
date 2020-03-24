@@ -6,7 +6,8 @@ import { ApplicationRootState } from '../../types';
 
 interface AppState {
   readonly loading: number;
-  readonly error: boolean;
+  readonly errorHealth: boolean;
+  readonly errorTodos: boolean;
   readonly isLogged: boolean;
   readonly jwt: string;
   readonly user: User;

@@ -3,10 +3,11 @@ import AppNavBar from 'components/AppNavBar';
 import {
   makeSelectLocation,
   makeSelectTodos,
-  makeSelectError,
+  makeSelectErrorTodos,
   makeSelectShowHealth,
   makeSelectInfo,
   makeSelectLoading,
+  makeSelectErrorHealth,
 } from 'containers/App/selectors';
 import { createStructuredSelector } from 'reselect';
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,14 +22,15 @@ import LoadingIndicator from 'components/LoadingIndicator';
 const stateSelector = createStructuredSelector({
   location: makeSelectLocation(),
   todos: makeSelectTodos(),
-  error: makeSelectError(),
+  error: makeSelectErrorTodos(),
   showHealthModal: makeSelectShowHealth(),
   info: makeSelectInfo(),
   showIndicator: makeSelectLoading(),
+  errorHealth: makeSelectErrorHealth()
 });
 
 export default function HomePage() {
-  const { location, todos, error, showHealthModal, info, showIndicator } = useSelector(
+  const { location, todos, error, showHealthModal, info, showIndicator, errorHealth } = useSelector(
     stateSelector,
   );
   const currentPath = location.pathname === '/' ? '/home' : location.pathname;
@@ -43,6 +45,7 @@ export default function HomePage() {
   return (
     <div>
       <AppNavBar
+        errorHealth={errorHealth}
         handleShowHealth={handleHealthShow}
         onLogout={onLogout}
         currentPath={currentPath}

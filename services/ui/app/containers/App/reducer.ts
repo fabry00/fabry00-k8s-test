@@ -5,7 +5,8 @@ console.log("reducer.global");
 // The initial state of the App
 export const initialState: ContainerState = {
   loading: 0,
-  error: false,
+  errorHealth: false,
+  errorTodos: false,
   isLogged: false,
   jwt: "",
   user: { id: -1, username: "" },
@@ -43,7 +44,7 @@ function appReducer(
     case ActionTypes.LOAD_TODOS_ERROR:
       return {
         ...state,
-        error: true
+        errorTodos: true
       };
     case ActionTypes.SHOW_HEALTH:
       return {
@@ -56,15 +57,21 @@ function appReducer(
         showHealth: false
       };
     case ActionTypes.FETCH_HEALTH_SUCCESS:
+      const error = !!action
+                      .payload
+                      .health
+                      .find(service => service.status === 'DOWN');
+
+      console.log("HEALTH ERROR:",error);
       return {
         ...state,
-        error: false,
+        errorHealth: error,
         info: action.payload
       };
     case ActionTypes.FETCH_HEALTH_ERROR:
       return {
         ...state,
-        error: true
+        errorHealth: true
       };
     //     case ActionTypes.LOAD_REPOS_SUCCESS:
     //       return {

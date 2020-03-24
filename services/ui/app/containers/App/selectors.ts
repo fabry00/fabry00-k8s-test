@@ -13,8 +13,11 @@ const makeSelectLocation = () =>
 const makeSelectCurrentPath = () =>
   createSelector(selectRoute, routeState => routeState.location.pathname);
 
-const makeSelectError = () =>
-  createSelector(selectGlobal, globalState => globalState.error);
+const makeSelectErrorTodos = () =>
+  createSelector(selectGlobal, globalState => globalState.errorTodos);
+
+const makeSelectErrorHealth = () =>
+  createSelector(selectGlobal, globalState => globalState.errorHealth);
 
 const makeSelectIsLogged = () =>
   createSelector(selectGlobal, globalState => globalState.isLogged);
@@ -45,7 +48,8 @@ const makeSelectLoading = () =>
 
 export {
   makeSelectLocation,
-  makeSelectError,
+  makeSelectErrorHealth,
+  makeSelectErrorTodos,
   makeSelectJwt,
   makeSelectIsLogged,
   makeSelectCurrentPath,

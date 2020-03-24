@@ -5,10 +5,12 @@ import Button from 'react-bootstrap/Button';
 
 export interface Props {
   handleShowHealth(): void;
+  errorHealth: boolean;
 }
 
 function AppNavBarLogin(props: Props) {
-  console.log('AppNavBarLogin:');
+  console.log('AppNavBarLogin:', props);
+  const variant = props.errorHealth ? 'outline-danger':'outline-dark';
   return (
     <NavBar bg="info" expand="lg">
       <NavBar.Brand href="#home">MyApp</NavBar.Brand>
@@ -16,7 +18,7 @@ function AppNavBarLogin(props: Props) {
       <NavBar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto"></Nav>
         <Nav className="mr-sm-2">
-          <Button variant="outline-dark" onClick={props.handleShowHealth}>Health check</Button>
+          <Button variant={variant} onClick={props.handleShowHealth}>Health check</Button>
         </Nav>
       </NavBar.Collapse>
     </NavBar>

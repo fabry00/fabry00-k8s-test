@@ -47,7 +47,7 @@ export function* fetchHealth() {
 
   console.log("fetchHealth", process.env.API_URL);
 
-  yield put(showLoading(true));
+  //yield put(showLoading(true));
 
   const url = process.env.API_URL;
 
@@ -60,7 +60,7 @@ export function* fetchHealth() {
     yield put(fetchHealthError());
   }
 
-  yield put(showLoading(false));
+  //yield put(showLoading(false));
 }
 
 

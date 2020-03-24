@@ -1,5 +1,6 @@
 import styled from 'styles/styled-components';
 
+// margin: 2em auto;
 const Wrapper = styled.div`
   margin: 2em auto;
   width: 40px;

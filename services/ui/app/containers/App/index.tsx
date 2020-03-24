@@ -33,6 +33,7 @@ export default function App() {
 
   const dispatch = useDispatch();
   setTimeout(() => dispatch(fetchHealth()), 100);
+  setInterval(() => dispatch(fetchHealth()), 10 * 1000);
 
   return (
     <div>
