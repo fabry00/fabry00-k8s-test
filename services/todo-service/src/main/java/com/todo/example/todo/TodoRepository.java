@@ -1,5 +1,7 @@
 package com.todo.example.todo;
 
+import com.todo.example.user.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
@@ -8,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Repository
+@Slf4j
 public class TodoRepository {
 
     // Should be immutable
@@ -55,5 +58,9 @@ public class TodoRepository {
                 .toString();
 
         return generatedString;
+    }
+
+    public void add(User user, Todo todo) {
+        log.info("Adding todo " + todo + " to user: " + user.getUsername());
     }
 }

@@ -17,7 +17,7 @@ public class HeadersRequestTransformer extends ProxyRequestTransformer {
         while (headerNames.hasMoreElements()) {
             String headerName = headerNames.nextElement();
             String headerValue = request.getHeader(headerName);
-            if (headerName.equals("x-access-token")) {
+            if (headerName.toLowerCase().equals("authorization")) {
                 requestBuilder.addHeader(headerName, headerValue);
             }
         }

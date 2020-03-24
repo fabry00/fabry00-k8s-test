@@ -18,6 +18,23 @@ import ErrorRow from './components/ErrorRow';
 import { logoutUser, showHealth, closeHealth } from 'containers/App/actions';
 import HealthCheckModal from 'components/HealthCheckModal';
 import LoadingIndicator from 'components/LoadingIndicator';
+import AddTodoRow from './components/AddTodoRow';
+import {
+  makeSelectShowAddTodoModal,
+  makeSelectShowNewTodoTitle,
+  makeSelectShowNewTodoContent,
+  makeSelectShowAddNewTodoDate,
+} from './selectors';
+import AddTodoModal from './components/AddTodoModal';
+import {
+  showAddTodoModal,
+  saveNewTodo,
+  changeNewTodoTitle,
+  changeNewTodoContent,
+  changeNewTodoDate,
+} from './actions';
+import reducer from './reducer';
+import saga from './saga';
 
 const stateSelector = createStructuredSelector({
   location: makeSelectLocation(),
@@ -26,18 +43,52 @@ const stateSelector = createStructuredSelector({
   showHealthModal: makeSelectShowHealth(),
   info: makeSelectInfo(),
   showIndicator: makeSelectLoading(),
-  errorHealth: makeSelectErrorHealth()
+  errorHealth: makeSelectErrorHealth(),
+  showTodoModal: makeSelectShowAddTodoModal(),
+  newTodoTitle: makeSelectShowNewTodoTitle(),
+  newTodoContent: makeSelectShowNewTodoContent(),
+  newTodoDate: makeSelectShowAddNewTodoDate(),
 });
+import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
+const key = 'home';
 
 export default function HomePage() {
-  const { location, todos, error, showHealthModal, info, showIndicator, errorHealth } = useSelector(
-    stateSelector,
-  );
+  const {
+    location,
+    todos,
+    error,
+    showHealthModal,
+    info,
+    showIndicator,
+    errorHealth,
+    showTodoModal,
+    newTodoTitle,
+    newTodoContent,
+    newTodoDate,
+  } = useSelector(stateSelector);
+  useInjectReducer({ key: key, reducer: reducer });
+  useInjectSaga({ key: key, saga: saga });
+
   const currentPath = location.pathname === '/' ? '/home' : location.pathname;
 
   const dispatch = useDispatch();
   const handleHealthShow = () => dispatch(showHealth());
   const handleHealthClose = () => dispatch(closeHealth());
+  const onShowAddTodoModal = () => dispatch(showAddTodoModal(true));
+  const onCloseAddTodoModal = () => dispatch(showAddTodoModal(false));
+  const onSaveAddTodoModal = () => {
+    dispatch(showAddTodoModal(false));
+    dispatch(saveNewTodo());
+  };
+
+  const onChangeNewTodoTitle = (evt: any) =>
+    dispatch(changeNewTodoTitle(evt.target.value));
+  const onChangeNewTodoContent = (evt: any) =>
+    dispatch(changeNewTodoContent(evt.target.value));
+  const onChangeNewTodoDate = (evt: any) =>
+    dispatch(changeNewTodoDate(evt.target.value));
+
   const onLogout = () => {
     dispatch(logoutUser());
   };
@@ -53,6 +104,7 @@ export default function HomePage() {
       <Container>
         <HeaderRow></HeaderRow>
         <LoadingIndicator show={showIndicator}></LoadingIndicator>
+        <AddTodoRow handleShowAddTodoModal={onShowAddTodoModal}></AddTodoRow>
         <TodosRow todos={todos}></TodosRow>
         <ErrorRow error={error}></ErrorRow>
       </Container>
@@ -61,6 +113,17 @@ export default function HomePage() {
         info={info}
         handleClose={handleHealthClose}
       ></HealthCheckModal>
+      <AddTodoModal
+        show={showTodoModal}
+        handleSave={onSaveAddTodoModal}
+        handleClose={onCloseAddTodoModal}
+        newTodoTitle={newTodoTitle}
+        onChangeNewTodoTitle={onChangeNewTodoTitle}
+        newTodoContent={newTodoContent}
+        onChangeNewTodoContent={onChangeNewTodoContent}
+        newTodoDate={newTodoDate}
+        onChangeNewTodoDate={onChangeNewTodoDate}
+      ></AddTodoModal>
     </div>
   );
 }

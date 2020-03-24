@@ -19,8 +19,8 @@ public class UserRepository {
         users.put(5L, new User(5, "user5", "pass5"));
     }
 
-    User get(long id) {
-        return users.get(id);
+    Optional<User> get(long id) {
+        return users.containsKey(id) ? Optional.of(users.get(id)) : Optional.empty();
     }
 
     public Optional<User> get(String username, String password) {

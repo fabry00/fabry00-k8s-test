@@ -28,12 +28,15 @@ const stateSelector = createStructuredSelector({
   isLogged: makeSelectIsLogged(),
 });
 
+let interval;
+
 export default function App() {
   useInjectSaga({ key: key, saga: saga });
 
   const dispatch = useDispatch();
   setTimeout(() => dispatch(fetchHealth()), 100);
-  setInterval(() => dispatch(fetchHealth()), 10 * 1000);
+  clearInterval(interval);
+  //interval = setInterval(() => dispatch(fetchHealth()), 10 * 1000);
 
   return (
     <div>

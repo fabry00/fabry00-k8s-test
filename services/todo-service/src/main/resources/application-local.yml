@@ -1,3 +1,5 @@
 server:
   port:
     9090
+app:
+  auth-endpoint: http://localhost:9091/api/users/from-token/

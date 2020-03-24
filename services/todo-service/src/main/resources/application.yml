@@ -3,3 +3,7 @@ app:
   pod-id: ${MY_POD_NAME:unknown}
   pod-namespace: ${MY_POD_NAMESPACE:unknown}
   pod-ip: ${MY_POD_ip:unknown}
+  auth-endpoint: ${USER_SERVICE:http://user-service:8080/api/users/from-token/}
+  cache:
+    max-values: 1000
+    ttl-minutes: 30

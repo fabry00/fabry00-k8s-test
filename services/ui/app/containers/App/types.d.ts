@@ -17,8 +17,8 @@ interface AppState {
 }
 
 interface Todo {
-  id: number;
-  userId: number;
+  id?: number;
+  userId?: number;
   title: string;
   content: string;
   created: number;

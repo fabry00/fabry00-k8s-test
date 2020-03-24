@@ -4,6 +4,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment';
+import Row from 'react-bootstrap/Row';
 
 export interface Props {
   todo: Todo;
@@ -22,7 +23,7 @@ function TodoCard(props: Props) {
   return (
     <Card>
       <Card.Header>
-        <Accordion.Toggle as={Button} variant="link" eventKey={index}>
+        <Accordion.Toggle as={Card.Header} variant="link" eventKey={index}>
           {expirationDate} | {props.todo.id} - {props.todo.title}
         </Accordion.Toggle>
       </Card.Header>

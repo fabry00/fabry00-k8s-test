@@ -2,8 +2,10 @@ package com.todo.example.todo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
+@ToString
 @EqualsAndHashCode(exclude = {"content"})
 class Todo {
 
