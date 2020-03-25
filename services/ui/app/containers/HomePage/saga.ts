@@ -31,11 +31,12 @@ export function* addTodo() {
   const jwt = yield select(makeSelectJwt());
   // Select username and password from store
   const date = yield select(makeSelectShowAddNewTodoDate());
+  const ds = date.includes("/") ? "/" : date.includes("-") ? "-": ".";
   const todo: Todo = {
     title: yield select(makeSelectShowNewTodoTitle()),
     content: yield select(makeSelectShowNewTodoContent()),
-    created: moment.now(),
-    expiration: moment(date, "DD/MM/YYYY").unix(),
+    created: moment.now() / 1000,
+    expiration: moment(date,`YYYY${ds}MM${ds}DD`).unix(),
   };
   const requestURL = `${url}/todos`;
   console.log("New Todo:", todo)

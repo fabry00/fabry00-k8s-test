@@ -24,11 +24,11 @@ spec:
     spec:
       containers:
         - name: todo-service
-          image: fabry/k8s-test-todo-service:1.1.1
+          image: fabry/k8s-test-todo-service:1.1.2
           resources:
             limits:
-              memory: 192M
-              cpu: ".2"
+              memory: 256M
+              cpu: ".3"
           livenessProbe:
             httpGet:
               path: /actuator/health

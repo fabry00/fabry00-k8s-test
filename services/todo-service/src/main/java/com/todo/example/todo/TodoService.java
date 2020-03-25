@@ -26,7 +26,6 @@ public class TodoService {
 
         return userOptional
                 .map(user -> {
-
                     log.info("Get all user Todos", user.getId());
                     return repo.findByUserId(user.getId());
                 })

@@ -25,14 +25,14 @@ spec:
     spec:
       containers:
         - name: slave
-          image: gcr.io/google_samples/gb-redisslave:v3
+          image: fabry/gb-redisslave:v3 # gcr.io/google_samples/gb-redisslave:v3
           volumeMounts:
                 - mountPath: /data
                   name: datadir
           resources:
-            requests:
-              cpu: 100m
-              memory: 100Mi
+            limits:
+              memory: 64M
+              cpu: ".1"
           env:
           - name: GET_HOSTS_FROM
             value: dns

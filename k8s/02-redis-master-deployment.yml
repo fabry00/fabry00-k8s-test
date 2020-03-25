@@ -24,14 +24,14 @@ spec:
     spec:
       containers:
         - name: master
-          image: k8s.gcr.io/redis:e2e  # or just image: redis
+          image: fabry/redis:e2e  # original: k8s.gcr.io/redis:e2e or just image: redis
           volumeMounts:
               - mountPath: /data
                 name: datadir
           resources:
-            requests:
-              cpu: 100m
-              memory: 100Mi
+            limits:
+              memory: 64M
+              cpu: ".1"
           ports:
           - containerPort: 6379
       volumes:
