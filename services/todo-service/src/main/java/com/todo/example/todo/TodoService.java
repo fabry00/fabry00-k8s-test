@@ -5,6 +5,7 @@ import com.todo.example.user.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +18,7 @@ public class TodoService {
     private final TodoRepository repo;
     private final TokenService tokenService;
 
-    public Optional<Todo> getTodo(long id) {
+    public Optional<Todo> getTodo(String id) {
         return repo.findById(id);
     }
 
@@ -43,6 +44,20 @@ public class TodoService {
             List<Todo> todos = repo.findByUserId(u.getId());
             log.info("Deleting  {}", todos.size());
             repo.deleteAll(todos);
+        });
+    }
+
+    @Transactional
+    public void deleteTodo(String id, String authorization) {
+        final Optional<User> userOptional = getUserFromToken(authorization);
+
+        userOptional.ifPresent(u -> {
+            log.info("Delete  Todo  {} for user {}", id, u.getId());
+            Optional<Todo> todo = repo.findById(id);
+            List<Todo> todos = repo.findByUserId(u.getId());
+            repo.deleteById(id);
+            Optional<Todo> todo2 = repo.findById(id);
+            log.info("s");
         });
     }
 
@@ -90,4 +105,5 @@ public class TodoService {
         // for debug
         repo.findAll().forEach(t -> log.info(t.toString()));
     }
+
 }

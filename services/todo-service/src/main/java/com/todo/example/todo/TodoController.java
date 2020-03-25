@@ -16,7 +16,7 @@ public class TodoController {
     private final TodoService todoService;
 
     @GetMapping("/{id}")
-    public Optional<Todo> todo(@PathVariable long id) {
+    public Optional<Todo> todo(@PathVariable String id) {
         return todoService.getTodo(id);
     }
 
@@ -28,6 +28,12 @@ public class TodoController {
     @DeleteMapping("")
     public ResponseEntity<?> deleteTodos(@RequestHeader("Authorization") String authorization) {
         todoService.deleteTodos(authorization);
+        return ResponseEntity.ok("");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteTodos(@PathVariable String id, @RequestHeader("Authorization") String authorization) {
+        todoService.deleteTodo(id, authorization);
         return ResponseEntity.ok("");
     }
 

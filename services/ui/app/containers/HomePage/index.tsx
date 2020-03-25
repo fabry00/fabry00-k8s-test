@@ -15,7 +15,7 @@ import Container from 'react-bootstrap/Container';
 import HeaderRow from './components/HeaderRow';
 import TodosRow from './components/TodosRow';
 import ErrorRow from './components/ErrorRow';
-import { logoutUser, showHealth, closeHealth, deleteAllTodos } from 'containers/App/actions';
+import { logoutUser, showHealth, closeHealth, deleteAllTodos, deleteTodo } from 'containers/App/actions';
 import HealthCheckModal from 'components/HealthCheckModal';
 import LoadingIndicator from 'components/LoadingIndicator';
 import AddTodoRow from './components/AddTodoRow';
@@ -76,6 +76,7 @@ export default function HomePage() {
   const handleHealthShow = () => dispatch(showHealth());
   const handleHealthClose = () => dispatch(closeHealth());
   const onDeleteAll = () => dispatch(deleteAllTodos());
+  const onHandleDelete = (id: number | undefined) => dispatch(deleteTodo(id || -1));
   const onShowAddTodoModal = () => dispatch(showAddTodoModal(true));
   const onCloseAddTodoModal = () => dispatch(showAddTodoModal(false));
   const onSaveAddTodoModal = () => {
@@ -110,7 +111,10 @@ export default function HomePage() {
         handleShowAddTodoModal={onShowAddTodoModal}
         handleDeleteAll={onDeleteAll}
         ></AddTodoRow>
-        <TodosRow todos={todos}></TodosRow>
+        <TodosRow
+          onHandleDelete={onHandleDelete}
+          todos={todos}
+        ></TodosRow>
         <ErrorRow error={error}></ErrorRow>
       </Container>
       <HealthCheckModal

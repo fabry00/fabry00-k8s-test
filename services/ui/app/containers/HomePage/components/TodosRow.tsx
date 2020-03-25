@@ -6,6 +6,7 @@ import { Todo } from 'containers/App/types';
 import TodoCard from './TodoCard';
 
 export interface Props {
+  onHandleDelete(id: number | undefined): void;
   todos: Todo[];
 }
 
@@ -17,6 +18,7 @@ function TodosRow(props: Props) {
   console.log('TodosRow', props);
   const orderedTodos = orderList(props.todos);
 
+
   return (
     <>
       <Row>
@@ -24,7 +26,12 @@ function TodosRow(props: Props) {
           <Accordion defaultActiveKey="0">
             {orderedTodos.map((value, index) => {
               return (
-                <TodoCard todo={value} index={index} key={index}></TodoCard>
+                <TodoCard
+                todo={value}
+                index={index}
+                key={index}
+                onHandleDelete={props.onHandleDelete}
+                ></TodoCard>
               );
             })}
           </Accordion>

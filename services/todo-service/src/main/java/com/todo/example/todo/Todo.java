@@ -19,8 +19,9 @@ class Todo implements Serializable {
 
     private static final long serialVersionUID = 5630345854047958835L;
     @Id
+    @Indexed
     @EqualsAndHashCode.Include
-    private Long id;
+    private String id;
     @Indexed
     private final long userId;
     private final String title;

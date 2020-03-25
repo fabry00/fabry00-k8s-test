@@ -47,10 +47,10 @@ function AddTodoModal(props: Props) {
             <div className="form-group">
               <label className="text-info">Content:</label>
               <br />
-              <Input
+              <Form.Control
+                as="textarea"
+                rows="3"
                 className="form-control"
-                type="text"
-                placeholder=""
                 value={props.newTodoContent}
                 onChange={props.onChangeNewTodoContent}
               />

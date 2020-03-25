@@ -4,7 +4,7 @@ enum ActionTypes {
   LOGOUT = 'myapp/App/LOGOUT',
   SET_JWT = 'myapp/App/SET_JWT',
 
-  // ADD_TODO = 'myapp/App/ADD_TODO',
+  DELETE_TODO = 'myapp/App/DELETE_TODO',
   DELETE_ALL_TODOS = 'myapp/App/DELETE_ALL_TODOS',
   LOAD_TODOS = 'myapp/App/LOAD_TODOS',
   LOAD_TODOS_SUSSESS = 'myapp/App/LOAD_TODOS_SUSSESS',
