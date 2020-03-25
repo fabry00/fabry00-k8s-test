@@ -38,4 +38,10 @@ public class AppProperties {
         private int maxValues;
         private int ttlMinutes;
     }
+
+    @NotNull
+    private String redisMasterHost;
+
+    @NotNull
+    private int redisMasterPort;
 }

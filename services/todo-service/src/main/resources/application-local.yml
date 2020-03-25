@@ -3,3 +3,5 @@ server:
     9090
 app:
   auth-endpoint: http://localhost:9091/api/users/from-token/
+  redis-master-host: localhost
+  redis-master-port: 6379

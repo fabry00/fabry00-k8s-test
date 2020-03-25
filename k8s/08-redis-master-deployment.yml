@@ -1,0 +1,39 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: redis-master
+  labels:
+    app: k8s-test
+    tier: backend
+    type: db
+spec:
+  selector:
+    matchLabels:
+      app: k8s-test
+      role: master
+      tier: backend
+      type: db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-test
+        role: master
+        tier: backend
+        type: db
+    spec:
+      containers:
+        - name: master
+          image: k8s.gcr.io/redis:e2e  # or just image: redis
+          volumeMounts:
+              - mountPath: /data
+                name: datadir
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+          - containerPort: 6379
+      volumes:
+        - name: datadir
+          emptyDir: {}

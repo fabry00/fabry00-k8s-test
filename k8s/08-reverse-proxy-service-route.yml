@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: k8s-test
+    tier: service
+    type: route
+  name: reverse-proxy-route
+spec:
+  port:
+    targetPort: reverse-proxy-port
+  tls:
+    # Edge means that the TSL connection is handled by the Router since our service provide an http one
+    # if the target sevice provide an http connection, use passthrough
+    termination: edge
+  to:
+    kind: Service
+    name: reverse-proxy
+    weight: 100

@@ -25,7 +25,7 @@ public class UserService {
     }
 
     public Optional<User> getUserFromToken(String token) {
-        log.info("getUserFromToken user:", token);
+        log.info("getUserFromToken:", token);
         return getUser(tokenUtil.getUserIdFromToken(token));
     }
 }
