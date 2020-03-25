@@ -76,7 +76,7 @@ export default function HomePage() {
   const handleHealthShow = () => dispatch(showHealth());
   const handleHealthClose = () => dispatch(closeHealth());
   const onDeleteAll = () => dispatch(deleteAllTodos());
-  const onHandleDelete = (id: number | undefined) => dispatch(deleteTodo(id || -1));
+  const onHandleDelete = (id: String | undefined) => dispatch(deleteTodo(id || ""));
   const onShowAddTodoModal = () => dispatch(showAddTodoModal(true));
   const onCloseAddTodoModal = () => dispatch(showAddTodoModal(false));
   const onSaveAddTodoModal = () => {

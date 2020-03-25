@@ -5,7 +5,6 @@ import com.todo.example.user.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,17 +46,17 @@ public class TodoService {
         });
     }
 
-    @Transactional
     public void deleteTodo(String id, String authorization) {
         final Optional<User> userOptional = getUserFromToken(authorization);
 
         userOptional.ifPresent(u -> {
             log.info("Delete  Todo  {} for user {}", id, u.getId());
-            Optional<Todo> todo = repo.findById(id);
-            List<Todo> todos = repo.findByUserId(u.getId());
+            final Optional<Todo> todo = repo.findById(id);
+            if (todo.isPresent() && !u.getId().equals(todo.get().getUserId())) {
+                log.error("not allowed");
+                return;
+            }
             repo.deleteById(id);
-            Optional<Todo> todo2 = repo.findById(id);
-            log.info("s");
         });
     }
 

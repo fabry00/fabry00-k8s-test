@@ -15,7 +15,7 @@ public class UserService {
     private final UserRepository repo;
     private final JwtTokenUtil tokenUtil;
 
-    public Optional<User> getUser(long id) {
+    public Optional<User> getUser(String id) {
         return repo.get(id);
     }
 

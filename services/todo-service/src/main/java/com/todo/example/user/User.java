@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class User {
 
-    private long id;
+    private String id;
     private String username;
 
     @JsonIgnore

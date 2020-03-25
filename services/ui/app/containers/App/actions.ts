@@ -6,7 +6,7 @@ import { Todo, User, Info } from './types';
 export const logoutUser = () => action(ActionTypes.LOGOUT);
 export const setJwt = (token: string, user: User) => action(ActionTypes.SET_JWT, { token, user });
 
-export const deleteTodo = (id: number) => action(ActionTypes.DELETE_TODO, id);
+export const deleteTodo = (id: String) => action(ActionTypes.DELETE_TODO, id);
 export const deleteAllTodos = () => action(ActionTypes.DELETE_ALL_TODOS);
 export const loadTodos = () => action(ActionTypes.LOAD_TODOS);
 export const loadTodosSuccess = (todos: Todo[]) => action(ActionTypes.LOAD_TODOS_SUSSESS, todos);

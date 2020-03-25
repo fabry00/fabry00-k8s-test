@@ -18,12 +18,10 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> user(@PathVariable(value = "id") long id) {
+    public ResponseEntity<?> user(@PathVariable(value = "id") String id) {
         final Optional<User> userDetails = userService.getUser(id);
-
         return userDetails.map(user -> ResponseEntity.ok(user))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-
     }
 
     @GetMapping("/from-token/{token}")

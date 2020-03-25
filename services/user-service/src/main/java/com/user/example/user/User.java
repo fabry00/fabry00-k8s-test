@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public class User {
 
-    private final long id;
+    private final String id;
     private final String username;
 
     @JsonIgnore

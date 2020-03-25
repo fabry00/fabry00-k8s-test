@@ -19,17 +19,16 @@ class Todo implements Serializable {
 
     private static final long serialVersionUID = 5630345854047958835L;
     @Id
-    @Indexed
     @EqualsAndHashCode.Include
     private String id;
     @Indexed
-    private final long userId;
+    private final String userId;
     private final String title;
     private final String content;
     private final long created;
     private final long expiration;
 
-    public Todo(long userId, String title, String content, long created, long expiration) {
+    public Todo(String userId, String title, String content, long created, long expiration) {
         this.userId = userId;
         this.title = title;
         this.content = content;

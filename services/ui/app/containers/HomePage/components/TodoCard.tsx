@@ -10,7 +10,7 @@ import Table from 'react-bootstrap/Table';
 import Badge from 'react-bootstrap/Badge';
 
 export interface Props {
-  onHandleDelete(id: number | undefined): void;
+  onHandleDelete(id: String | undefined): void;
   todo: Todo;
   index: number;
 }

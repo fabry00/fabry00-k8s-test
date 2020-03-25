@@ -6,7 +6,7 @@ import { Todo } from 'containers/App/types';
 import TodoCard from './TodoCard';
 
 export interface Props {
-  onHandleDelete(id: number | undefined): void;
+  onHandleDelete(id: String | undefined): void;
   todos: Todo[];
 }
 

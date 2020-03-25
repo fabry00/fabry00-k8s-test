@@ -9,17 +9,14 @@ import java.util.Optional;
 @Repository
 public class UserRepository {
 
-    private final Map<Long, User> users = new HashMap<>();
+    private final Map<String, User> users = new HashMap<>();
 
     UserRepository() {
-        users.put(1L, new User(1, "user1", "pass1"));
-        users.put(2L, new User(2, "user2", "pass2"));
-        users.put(3L, new User(3, "user3", "pass3"));
-        users.put(4L, new User(4, "user4", "pass4"));
-        users.put(5L, new User(5, "user5", "pass5"));
+        users.put("1", new User("1", "user1", "pass1"));
+        users.put("2", new User("2", "user2", "pass2"));
     }
 
-    Optional<User> get(long id) {
+    Optional<User> get(String id) {
         return users.containsKey(id) ? Optional.of(users.get(id)) : Optional.empty();
     }
 
