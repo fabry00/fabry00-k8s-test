@@ -40,7 +40,9 @@ function TodoCard(props: Props) {
             </Col>
             <Col>{props.todo.title}</Col>
             <Col className="text-right">
-              <Button variant="danger" onClick={handleDelete}>Del</Button>
+              <Button variant="danger" onClick={handleDelete}>
+                Del
+              </Button>
             </Col>
           </Row>
         </Accordion.Toggle>
@@ -59,11 +61,15 @@ function TodoCard(props: Props) {
           </Row>
           <Row>
             <Col>
-              <hr></hr>>
+              <hr></hr>
             </Col>
           </Row>
           <Row>
-            <Col>{props.todo.content}</Col>
+            <Col>
+              <div
+                dangerouslySetInnerHTML={{ __html: props.todo.content }}
+              ></div>
+            </Col>
           </Row>
         </Card.Body>
       </Accordion.Collapse>

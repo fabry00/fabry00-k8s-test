@@ -9,7 +9,7 @@ export const initialState: ContainerState = {
   errorTodos: false,
   isLogged: false,
   jwt: "",
-  user: { id: -1, username: "" },
+  user: { id: "", username: "" },
   todos: [],
   showHealth: false,
   info: { environment: "", podId: "", podIp: "", podNamespace: "", health: [] }
