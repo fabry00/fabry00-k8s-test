@@ -15,7 +15,7 @@ import Container from 'react-bootstrap/Container';
 import HeaderRow from './components/HeaderRow';
 import TodosRow from './components/TodosRow';
 import ErrorRow from './components/ErrorRow';
-import { logoutUser, showHealth, closeHealth } from 'containers/App/actions';
+import { logoutUser, showHealth, closeHealth, deleteAllTodos } from 'containers/App/actions';
 import HealthCheckModal from 'components/HealthCheckModal';
 import LoadingIndicator from 'components/LoadingIndicator';
 import AddTodoRow from './components/AddTodoRow';
@@ -75,6 +75,7 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const handleHealthShow = () => dispatch(showHealth());
   const handleHealthClose = () => dispatch(closeHealth());
+  const onDeleteAll = () => dispatch(deleteAllTodos());
   const onShowAddTodoModal = () => dispatch(showAddTodoModal(true));
   const onCloseAddTodoModal = () => dispatch(showAddTodoModal(false));
   const onSaveAddTodoModal = () => {
@@ -104,7 +105,11 @@ export default function HomePage() {
       <Container>
         <HeaderRow></HeaderRow>
         <LoadingIndicator show={showIndicator}></LoadingIndicator>
-        <AddTodoRow totalTodos={todos.length} handleShowAddTodoModal={onShowAddTodoModal}></AddTodoRow>
+        <AddTodoRow
+        totalTodos={todos.length}
+        handleShowAddTodoModal={onShowAddTodoModal}
+        handleDeleteAll={onDeleteAll}
+        ></AddTodoRow>
         <TodosRow todos={todos}></TodosRow>
         <ErrorRow error={error}></ErrorRow>
       </Container>

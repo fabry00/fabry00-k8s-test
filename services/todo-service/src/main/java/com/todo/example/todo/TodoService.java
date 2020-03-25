@@ -26,11 +26,24 @@ public class TodoService {
 
         return userOptional
                 .map(user -> {
-                    log.info("Get all user Todos", user.getId());
-                    return repo.findByUserId(user.getId());
+                    log.info("Get all user's Todos {}", user.getId());
+                    List<Todo> todos = repo.findByUserId(user.getId());
+                    log.info("user's Todos {}", todos.size());
+                    return todos;
                 })
                 // TODO we should return unauthorized
                 .orElse(ImmutableList.of());
+    }
+
+    public void deleteTodos(String authorization) {
+        final Optional<User> userOptional = getUserFromToken(authorization);
+
+        userOptional.ifPresent(u -> {
+            log.info("Delete all user's Todos {}", u.getId());
+            List<Todo> todos = repo.findByUserId(u.getId());
+            log.info("Deleting  {}", todos.size());
+            repo.deleteAll(todos);
+        });
     }
 
     public boolean create(Todo todo, String authorizationHeader) {

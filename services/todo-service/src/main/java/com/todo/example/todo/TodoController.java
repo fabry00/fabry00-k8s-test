@@ -25,6 +25,12 @@ public class TodoController {
         return todoService.getAllUserTodos(authorization);
     }
 
+    @DeleteMapping("")
+    public ResponseEntity<?> deleteTodos(@RequestHeader("Authorization") String authorization) {
+        todoService.deleteTodos(authorization);
+        return ResponseEntity.ok("");
+    }
+
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody Todo todo, @RequestHeader("Authorization") String authorization) {
         return todoService.create(todo, authorization) ? ResponseEntity.ok("") : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

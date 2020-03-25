@@ -3,7 +3,6 @@
  */
 import moment from 'moment';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { saveNewTodo } from './actions';
 import ActionTypes from './constants';
 
 import request from 'utils/request';

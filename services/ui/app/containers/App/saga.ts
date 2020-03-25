@@ -5,10 +5,10 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import ActionTypes from './constants';
 import request from 'utils/request';
-import { makeSelectJwt, makeSelectUser } from './selectors';
-import { loadTodosSuccess, loadTodosError, fetchHealthSuccess, fetchHealthError, showLoading } from './actions';
+import { makeSelectJwt } from './selectors';
+import { loadTodos, loadTodosSuccess, loadTodosError, fetchHealthSuccess, fetchHealthError, showLoading } from './actions';
 
-export function* loadTodos() {
+export function* loadUserTodos() {
   console.log("loadTodos", process.env.API_URL);
 
   yield put(showLoading(true));
@@ -43,6 +43,41 @@ export function* loadTodos() {
   yield put(showLoading(false));
 }
 
+export function* deleteAllUserTodos() {
+  console.log("deleteAllTodos", process.env.API_URL);
+
+  // TODO implement confirm as React component
+  const confirmation = confirm("Are you sure?");
+  if (!confirmation) {
+    return;
+  }
+  yield put(showLoading(true));
+
+  const url = process.env.API_URL;
+
+  // // Select username and password from store
+  const jwt = yield select(makeSelectJwt());
+  // const user = yield select(makeSelectUser());
+  const requestURL = `${url}/todos`;
+
+  try {
+    //   // Call our request helper (see 'utils/request')
+    const opts: RequestInit = {
+      method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + jwt
+      },
+    };
+    const response = yield call(request, requestURL, opts);
+    yield put(loadTodosSuccess(response));
+  } catch (err) {
+    console.error(err);
+  }
+  yield put(loadTodos());
+  yield put(showLoading(false));
+}
+
 export function* fetchHealth() {
 
   console.log("fetchHealth", process.env.API_URL);
@@ -71,7 +106,7 @@ export default function* doLoadSaga() {
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
-  yield takeLatest(ActionTypes.LOAD_TODOS, loadTodos);
-
+  yield takeLatest(ActionTypes.LOAD_TODOS, loadUserTodos);
+  yield takeLatest(ActionTypes.DELETE_ALL_TODOS, deleteAllUserTodos);
   yield takeLatest(ActionTypes.FETCH_HEALTH, fetchHealth);
 }
