@@ -22,8 +22,8 @@ export function* loadTodos() {
 
   // // Select username and password from store
   const jwt = yield select(makeSelectJwt());
-  const user = yield select(makeSelectUser());
-  const requestURL = `${url}/todos/user/${user.id}`;
+  // const user = yield select(makeSelectUser());
+  const requestURL = `${url}/todos`;
 
   try {
     //   // Call our request helper (see 'utils/request')
@@ -44,27 +44,6 @@ export function* loadTodos() {
 }
 
 export function* fetchHealth() {
-
-  console.log("fetchHealth", process.env.API_URL);
-
-  //yield put(showLoading(true));
-
-  const url = process.env.API_URL;
-
-  const requestURL = `${url}/info`;
-
-  try {
-    const response = yield call(request, requestURL);
-    yield put(fetchHealthSuccess(response));
-  } catch (err) {
-    yield put(fetchHealthError());
-  }
-
-  //yield put(showLoading(false));
-}
-
-
-export function* addTodo() {
 
   console.log("fetchHealth", process.env.API_URL);
 

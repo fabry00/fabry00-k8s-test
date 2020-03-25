@@ -5,7 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -15,18 +16,23 @@ public class TodoController {
     private final TodoService todoService;
 
     @GetMapping("/{id}")
-    public Todo todo(@PathVariable long id) {
+    public Optional<Todo> todo(@PathVariable long id) {
         return todoService.getTodo(id);
     }
 
-    @GetMapping("/user/{id}")
-    public Set<Todo> userTodos(@PathVariable long id) {
-        return todoService.getAllUserTodos(id);
+    @GetMapping("")
+    public List<Todo> userTodos(@RequestHeader("Authorization") String authorization) {
+        return todoService.getAllUserTodos(authorization);
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity<?> create(@RequestBody Todo todo, @RequestHeader("Authorization") String authorization) {
         return todoService.create(todo, authorization) ? ResponseEntity.ok("") : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    public ResponseEntity<?> update(@RequestBody Todo todo, @RequestHeader("Authorization") String authorization) {
+        return todoService.update(todo, authorization) ? ResponseEntity.ok("") : ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
 }

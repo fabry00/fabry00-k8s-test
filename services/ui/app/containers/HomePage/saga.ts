@@ -12,12 +12,12 @@ import {
   makeSelectShowNewTodoContent,
   makeSelectShowAddNewTodoDate
 } from './selectors';
-import { showLoading } from 'containers/App/actions';
+import { showLoading, loadTodos } from 'containers/App/actions';
 import { push } from 'connected-react-router';
 import { Todo } from 'containers/App/types';
 import { makeSelectJwt } from 'containers/App/selectors';
 
-export function* loginUser() {
+export function* addTodo() {
   console.log("URL", process.env.API_URL);
 
   yield put(showLoading(true));
@@ -54,12 +54,11 @@ export function* loginUser() {
       referrerPolicy: 'no-referrer', // no-referrer, *client
       body: JSON.stringify(todo) // body data type must match "Content-Type" header
     };
-    const response = yield call(request, requestURL, opts);
-
+    yield call(request, requestURL, opts);
   } catch (err) {
     //yield put(loginError());
   }
-
+  yield put(loadTodos());
   yield put(showLoading(false));
 }
 
@@ -71,5 +70,5 @@ export default function* doSaga() {
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
-  yield takeLatest(ActionTypes.SAVE_NEW_TODO, loginUser);
+  yield takeLatest(ActionTypes.SAVE_NEW_TODO, addTodo);
 }

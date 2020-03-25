@@ -60,7 +60,7 @@ function AddTodoModal(props: Props) {
               <br />
               <Input
                 className="form-control"
-                type="text"
+                type="date"
                 placeholder="DD/MM/YYYY"
                 value={props.newTodoDate}
                 onChange={props.onChangeNewTodoDate}

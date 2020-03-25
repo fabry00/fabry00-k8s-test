@@ -18,15 +18,19 @@ function TodosRow(props: Props) {
   const orderedTodos = orderList(props.todos);
 
   return (
-    <Row>
-      <Col>
-        <Accordion defaultActiveKey="0">
-          {orderedTodos.map((value, index) => {
-            return <TodoCard todo={value} index={index} key={index}></TodoCard>;
-          })}
-        </Accordion>
-      </Col>
-    </Row>
+    <>
+      <Row>
+        <Col>
+          <Accordion defaultActiveKey="0">
+            {orderedTodos.map((value, index) => {
+              return (
+                <TodoCard todo={value} index={index} key={index}></TodoCard>
+              );
+            })}
+          </Accordion>
+        </Col>
+      </Row>
+    </>
   );
 }
 

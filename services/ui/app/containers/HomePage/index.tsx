@@ -104,7 +104,7 @@ export default function HomePage() {
       <Container>
         <HeaderRow></HeaderRow>
         <LoadingIndicator show={showIndicator}></LoadingIndicator>
-        <AddTodoRow handleShowAddTodoModal={onShowAddTodoModal}></AddTodoRow>
+        <AddTodoRow totalTodos={todos.length} handleShowAddTodoModal={onShowAddTodoModal}></AddTodoRow>
         <TodosRow todos={todos}></TodosRow>
         <ErrorRow error={error}></ErrorRow>
       </Container>

@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 export interface Props {
   handleShowAddTodoModal(): void;
+  totalTodos: number;
 }
 
 function AddTodoRow(props: Props) {
@@ -13,7 +14,7 @@ function AddTodoRow(props: Props) {
   return (
     <div>
       <Row>
-        <Col></Col>
+        <Col>Total todos: {props.totalTodos} </Col>
         <Col className="text-right">
           <Button onClick={props.handleShowAddTodoModal} variant="success">+ Add</Button>
         </Col>
