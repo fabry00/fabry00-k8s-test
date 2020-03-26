@@ -28,7 +28,15 @@ spec:
           resources:
               limits:
                 memory: 64M
-                cpu: ".1"   
+                cpu: ".1" 
+          livenessProbe:
+            httpGet:
+              path: /nginx_status
+              port: 80
+            initialDelaySeconds: 300
+            timeoutSeconds: 5
+            periodSeconds: 60
+            failureThreshold: 1  
           volumeMounts:
             - mountPath: /opt/bitnami/nginx/conf/ # mount nginx-conf volumn to /etc/nginx
               readOnly: true
