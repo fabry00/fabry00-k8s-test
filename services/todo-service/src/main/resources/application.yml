@@ -5,8 +5,16 @@ app:
   pod-namespace: ${MY_POD_NAMESPACE:unknown}
   pod-ip: ${MY_POD_ip:unknown}
   auth-endpoint: ${USER_SERVICE:http://user-service:8080/api/users/from-token/}
-  redis-master-host: ${USER_SERVICE:redis-master}
-  redis-master-port: ${USER_SERVICE:6379}
+  redis-master-host: ${REDIS_HOST:redis-master}
+  redis-master-port: ${REDIS_PORT:6379}
   cache:
-    max-values: 1000
-    ttl-minutes: 30
+    default-ttl-minutes: 10
+    cacheExpirations:
+      usersTokensCache: 180
+
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: health, info, caches

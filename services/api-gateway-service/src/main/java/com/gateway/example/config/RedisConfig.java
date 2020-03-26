@@ -1,4 +1,4 @@
-package com.todo.example.config;
+package com.gateway.example.config;
 
 import io.lettuce.core.ReadFrom;
 import org.springframework.cache.CacheManager;
@@ -24,7 +24,7 @@ import java.util.Map;
 public class RedisConfig {
 
     @Bean
-    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, AppProperties properties) {
+    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, ApiGatewayProperties properties) {
 
         //  Default cache configuration
         final RedisCacheConfiguration defaultCacheConfigs = createCacheConfiguration(properties
@@ -42,24 +42,10 @@ public class RedisConfig {
                 .cacheDefaults(defaultCacheConfigs)
                 .withInitialCacheConfigurations(cacheConfigurations).build();
 
-//        ConcurrentMapCacheManager cacheManager = new ConcurrentMapCacheManager() {
-//
-//            @Override
-//            protected Cache createConcurrentMapCache(final String name) {
-//                return new ConcurrentMapCache(name,
-//                        CacheBuilder.newBuilder()
-//                                .expireAfterWrite(properties.getCache().getTtlMinutes(), TimeUnit.MINUTES)
-//                                .maximumSize(properties.getCache().getMaxValues())
-//                                .build().
-//                                asMap(), false);
-//            }
-//        };
-//
-//        return cacheManager;
     }
 
     @Bean
-    public LettuceConnectionFactory redisConnectionFactory(AppProperties properties) {
+    public LettuceConnectionFactory redisConnectionFactory(ApiGatewayProperties properties) {
         LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder()
                 .readFrom(ReadFrom.REPLICA_PREFERRED)
                 .build();

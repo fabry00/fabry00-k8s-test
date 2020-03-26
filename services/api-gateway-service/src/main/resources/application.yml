@@ -5,9 +5,12 @@ api:
     pod-id: ${MY_POD_NAME:unknown}
     pod-namespace: ${MY_POD_NAMESPACE:unknown}
     pod-ip: ${MY_POD_ip:unknown}
+    redis-master-host: ${REDIS_HOST:redis-master}
+    redis-master-port: ${REDIS_PORT:6379}
     cache:
-      max-values: 1000
-      ttl-minutes: 30
+      default-ttl-minutes: 10
+      cacheExpirations:
+        tokenValidCache: 180
     services:
       todo: ${TODO_SERVICE:todo-service:8080}
       user: ${USER_SERVICE:user-service:8080}
@@ -22,3 +25,11 @@ api:
       - location: http://${api.gateway.services.user}
         path: '[/]*api/authenticate.*'
         name: user-service
+
+
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: health, info, caches

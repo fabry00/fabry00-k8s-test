@@ -21,7 +21,7 @@ public class TokenService {
         this.properties = properties;
     }
 
-    @Cacheable("getUserFromToken")
+    @Cacheable(cacheNames = "usersTokensCache")
     public Optional<User> getUserFromToken(String token) {
         try {
             final String url = properties.getAuthEndpoint() + token;
@@ -40,4 +40,5 @@ public class TokenService {
 
         return Optional.empty();
     }
+
 }

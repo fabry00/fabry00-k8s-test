@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Slf4j
 @AllArgsConstructor
+@Slf4j
 public class TodoService {
 
     private final TodoRepository repo;

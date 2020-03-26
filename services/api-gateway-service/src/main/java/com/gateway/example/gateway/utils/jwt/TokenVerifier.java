@@ -23,7 +23,7 @@ public class TokenVerifier {
                 .orElseThrow(() -> new RuntimeException("authenticate path not found"));
     }
 
-    @Cacheable("verifyToken")
+    @Cacheable("tokenValidCache")
     public boolean verifyToken(String token) {
         boolean authorized = false;
         try {
