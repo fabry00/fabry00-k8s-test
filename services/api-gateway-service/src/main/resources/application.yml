@@ -1,5 +1,6 @@
 api:
   gateway:
+    version: 1.0.0
     environment: none
     pod-id: ${MY_POD_NAME:unknown}
     pod-namespace: ${MY_POD_NAMESPACE:unknown}

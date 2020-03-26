@@ -12,7 +12,7 @@ export const initialState: ContainerState = {
   user: { id: "", username: "" },
   todos: [],
   showHealth: false,
-  info: { environment: "", podId: "", podIp: "", podNamespace: "", health: [] }
+  info: { version: "", environment: "", podId: "", podIp: "", podNamespace: "", health: [] }
 };
 
 // Take this container's state (as a slice of root state), this container's actions and return new state

@@ -6,7 +6,6 @@ import Button from 'react-bootstrap/Button';
 import moment from 'moment';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Table from 'react-bootstrap/Table';
 import Badge from 'react-bootstrap/Badge';
 
 export interface Props {
@@ -29,6 +28,8 @@ function TodoCard(props: Props) {
   const index: string = `${props.index}`;
   const expirationDate: string = toDate(props.todo.expiration);
   const creationDate: string = toDate(props.todo.created);
+  const expired: boolean = moment.now() / 1000 > props.todo.expiration;
+  const variant= expired ? "danger" : "secondary";
   return (
     <Card>
       <Card.Header>
@@ -36,7 +37,7 @@ function TodoCard(props: Props) {
           <Row>
             <Col>
               {' '}
-              <Badge variant="secondary">></Badge> {expirationDate}
+              <Badge variant={variant}>></Badge> {expirationDate}
             </Col>
             <Col>{props.todo.title}</Col>
             <Col className="text-right">

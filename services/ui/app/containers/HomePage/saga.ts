@@ -34,6 +34,7 @@ export function* addTodo() {
   const todo: Todo = {
     title: yield select(makeSelectShowNewTodoTitle()),
     content: yield select(makeSelectShowNewTodoContent()),
+    completed: false,
     created: moment.now() / 1000,
     expiration: moment(date,`YYYY${ds}MM${ds}DD`).unix(),
   };

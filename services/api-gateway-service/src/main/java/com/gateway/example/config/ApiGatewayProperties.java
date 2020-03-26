@@ -19,6 +19,9 @@ import java.util.stream.Collectors;
 public class ApiGatewayProperties {
 
     @NotNull
+    private String version;
+
+    @NotNull
     private String environment;
 
     @NotNull

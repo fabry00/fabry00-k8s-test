@@ -7,5 +7,5 @@ eval $(minikube -p minikube docker-env)
 
 # Build and create image
 # npm run build
-docker build -t "fabry/k8s-test-ui:$1" --rm=true --force-rm=true .
-docker push "fabry/k8s-test-ui:$1"
+docker build -t "fabry/k8s-test-ui:${1}" --rm=true --force-rm=true .
+docker push "fabry/k8s-test-ui:${1}"

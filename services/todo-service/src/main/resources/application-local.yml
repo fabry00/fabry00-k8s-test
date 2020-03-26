@@ -2,6 +2,10 @@ server:
   port:
     9090
 app:
+  environment: local
+  pod-id: local
+  pod-namespace: local
+  pod-ip: local
   auth-endpoint: http://localhost:9091/api/users/from-token/
   redis-master-host: localhost
   redis-master-port: 6379

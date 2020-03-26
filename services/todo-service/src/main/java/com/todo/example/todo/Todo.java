@@ -25,13 +25,15 @@ class Todo implements Serializable {
     private final String userId;
     private final String title;
     private final String content;
+    private final boolean completed;
     private final long created;
     private final long expiration;
 
-    public Todo(String userId, String title, String content, long created, long expiration) {
+    public Todo(String userId, String title, String content, boolean completed, long created, long expiration) {
         this.userId = userId;
         this.title = title;
         this.content = content;
+        this.completed = completed;
         this.created = created;
         this.expiration = expiration;
     }

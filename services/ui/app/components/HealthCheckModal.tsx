@@ -16,7 +16,7 @@ function HealthCheckModal(props: Props) {
   const now = moment().format('DD/MM/YYYY HH:mm:ss');
   return (
     <>
-      <Modal show={props.show} onHide={props.handleClose}>
+      <Modal size="lg" show={props.show} onHide={props.handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>System Health Check</Modal.Title>
         </Modal.Header>
@@ -29,9 +29,10 @@ function HealthCheckModal(props: Props) {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>#</th>
                 <th>Service Name</th>
                 <th>Status</th>
+                <th>Version</th>
+                <th>PodId</th>
                 <th>Fetched</th>
               </tr>
             </thead>
@@ -39,7 +40,6 @@ function HealthCheckModal(props: Props) {
               {props.info.health.map((value, index) => {
                 return (
                   <tr key={index}>
-                    <td>{index}</td>
                     <td>{value.name}</td>
                     <td>
                       {value.status == 'DOWN' ? (
@@ -48,6 +48,8 @@ function HealthCheckModal(props: Props) {
                         <Badge variant="secondary">{value.status}</Badge>
                       )}
                     </td>
+                    <td>{value.version}</td>
+                    <td>{value.podId}</td>
                     <td>{now}</td>
                   </tr>
                 );

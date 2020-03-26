@@ -35,37 +35,45 @@ public class InfoService {
     }
 
     private Info.ServiceHealth fetchServiceHealth(Map.Entry<String, String> service) {
-        final String url = String.format("%s/actuator/health", service.getValue());
+        final String url = String.format("%s/info", service.getValue());
         log.info("Querying: {} at {}", url, service.getKey());
         try {
             String response = Request.Get(url)
                     .execute()
                     .returnContent().asString();
-            return new Info.ServiceHealth(service.getKey(), responseToHealth(response));
+            Info.ServiceHealth info = responseToHealth(response);
+            info.setName(service.getKey());
+            info.setStatus(Status.UP.toString());
+            return info;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return new Info.ServiceHealth(service.getKey(), Status.DOWN.toString());
+        Info.ServiceHealth info = new Info.ServiceHealth();
+        info.setName(service.getKey());
+        info.setStatus(Status.DOWN.toString());
+        return info;
     }
 
-    private String responseToHealth(String response) {
+    private Info.ServiceHealth responseToHealth(String response) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            HealthResponse health = mapper.readValue(response, HealthResponse.class);
-            if (health.status.equals(Status.UP.toString())) {
-                return Status.UP.toString();
-            }
+            return mapper.readValue(response, Info.ServiceHealth.class);
+
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return Status.DOWN.toString();
+        throw new RuntimeException("Error getting info");
 
     }
 
     @Data
     @NoArgsConstructor
     private static class HealthResponse {
-        private String status;
+        private String version;
+        private String environment;
+        private String podId;
+        private String podNamespace;
+        private String podIp;
     }
 }

@@ -13,6 +13,7 @@ import java.util.Set;
 @EqualsAndHashCode
 class Info {
 
+    private final String version;
     private final String environment;
     private final String podId;
     private final String podNamespace;
@@ -20,6 +21,7 @@ class Info {
     private Set<ServiceHealth> health;
 
     Info(ApiGatewayProperties properties) {
+        this.version = properties.getVersion();
         this.environment = properties.getEnvironment();
         this.podId = properties.getPodId();
         this.podNamespace = properties.getPodNamespace();
@@ -34,8 +36,13 @@ class Info {
     @Data
     @ToString
     public static class ServiceHealth {
-        private final String name;
-        private final String status;
+        private String name;
+        private String status;
+        private String version;
+        private String environment;
+        private String podId;
+        private String podNamespace;
+        private String podIp;
     }
 
 }

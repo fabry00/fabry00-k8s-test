@@ -66,6 +66,7 @@ public class TodoService {
             Todo newTodo = new Todo(user.getId(),
                     todo.getTitle(),
                     todo.getContent(),
+                    todo.isCompleted(),
                     todo.getCreated(),
                     todo.getExpiration());
 

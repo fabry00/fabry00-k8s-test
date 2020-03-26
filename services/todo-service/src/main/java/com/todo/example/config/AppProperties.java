@@ -15,6 +15,9 @@ import javax.validation.constraints.NotNull;
 public class AppProperties {
 
     @NotNull
+    private String version;
+
+    @NotNull
     private String environment;
 
     @NotNull

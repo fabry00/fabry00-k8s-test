@@ -3,5 +3,8 @@ server:
     9091
 
 app:
-  environment: dev
+  environment: local
+  pod-id: local
+  pod-namespace: local
+  pod-ip: local
   jwt-secret: secret

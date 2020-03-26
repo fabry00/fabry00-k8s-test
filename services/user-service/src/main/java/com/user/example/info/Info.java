@@ -10,12 +10,14 @@ import org.springframework.stereotype.Component;
 @EqualsAndHashCode
 class Info {
 
+    private final String version;
     private final String environment;
     private final String podId;
     private final String podNamespace;
     private final String podIp;
 
     Info(AppProperties properties) {
+        this.version = properties.getVersion();
         this.environment = properties.getEnvironment();
         this.podId = properties.getPodId();
         this.podNamespace = properties.getPodNamespace();

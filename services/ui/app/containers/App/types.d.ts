@@ -21,6 +21,7 @@ interface Todo {
   userId?: String;
   title: string;
   content: string;
+  completed: boolean;
   created: number;
   expiration: number;
 }
@@ -31,6 +32,7 @@ interface User {
 }
 
 interface Info {
+  version: string,
   environment: string,
   podId: string,
   podNamespace: string,
@@ -40,7 +42,12 @@ interface Info {
 
 interface Health {
   name: string,
-  status: string
+  status: string,
+  version: string,
+  environment: string,
+  podId: string,
+  podNamespace: string,
+  podIp: string,
 }
 
 /* --- ACTIONS --- */
