@@ -15,6 +15,7 @@ public class UserAuth {
 
     private final TokenVerifier tokenVerifier;
 
+    // TODO use the Spring security!!
     public boolean checkUserAuth(String jwtSecret, HttpServletRequest request) {
         if (request.getRequestURI().contains("/api/authenticate")) {
             // No pre-authentication needed
