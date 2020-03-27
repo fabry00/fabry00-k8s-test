@@ -1,6 +1,6 @@
 package com.gateway.example.gateway;
 
-import com.gateway.example.config.ApiGatewayProperties;
+import com.gateway.example.config.AppProperties;
 import com.gateway.example.gateway.utils.ContentRequestTransformer;
 import com.gateway.example.gateway.utils.HeadersRequestTransformer;
 import com.gateway.example.gateway.utils.URLRequestTransformer;
@@ -32,11 +32,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Slf4j
 public class GatewayController {
 
-    private final ApiGatewayProperties properties;
+    private final AppProperties properties;
     private final UserAuth userAuth;
     private HttpClient httpClient;
 
-    public GatewayController(ApiGatewayProperties properties, UserAuth userAuth, HttpClient httpClient) {
+    public GatewayController(AppProperties properties, UserAuth userAuth, HttpClient httpClient) {
         this.properties = properties;
         this.userAuth = userAuth;
         this.httpClient = httpClient;

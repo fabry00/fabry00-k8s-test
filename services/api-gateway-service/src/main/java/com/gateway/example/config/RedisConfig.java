@@ -24,7 +24,7 @@ import java.util.Map;
 public class RedisConfig {
 
     @Bean
-    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, ApiGatewayProperties properties) {
+    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory, AppProperties properties) {
 
         //  Default cache configuration
         final RedisCacheConfiguration defaultCacheConfigs = createCacheConfiguration(properties
@@ -45,7 +45,7 @@ public class RedisConfig {
     }
 
     @Bean
-    public LettuceConnectionFactory redisConnectionFactory(ApiGatewayProperties properties) {
+    public LettuceConnectionFactory redisConnectionFactory(AppProperties properties) {
         LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder()
                 .readFrom(ReadFrom.REPLICA_PREFERRED)
                 .build();

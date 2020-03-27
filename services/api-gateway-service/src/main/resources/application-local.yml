@@ -1,11 +1,10 @@
-api:
-  gateway:
-    environment: none
-    pod-id: local
-    pod-namespace: local
-    pod-ip: local
-    redis-master-host: localhost
-    redis-master-port: 6379
-    services:
-      todo: "localhost:9090"
-      user: "localhost:9091"
+app:
+  environment: none
+  pod-id: local
+  pod-namespace: local
+  pod-ip: local
+  redis-master-host: localhost
+  redis-master-port: 6379
+  services:
+    todo: "localhost:9090"
+    user: "localhost:9091"

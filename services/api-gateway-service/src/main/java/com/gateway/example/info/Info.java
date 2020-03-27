@@ -1,6 +1,6 @@
 package com.gateway.example.info;
 
-import com.gateway.example.config.ApiGatewayProperties;
+import com.gateway.example.config.AppProperties;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -20,7 +20,7 @@ class Info {
     private final String podIp;
     private Set<ServiceHealth> health;
 
-    Info(ApiGatewayProperties properties) {
+    Info(AppProperties properties) {
         this.version = properties.getVersion();
         this.environment = properties.getEnvironment();
         this.podId = properties.getPodId();

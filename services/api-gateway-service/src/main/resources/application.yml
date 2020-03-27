@@ -1,31 +1,29 @@
-api:
-  gateway:
-    version: 1.0.0
-    environment: none
-    pod-id: ${MY_POD_NAME:unknown}
-    pod-namespace: ${MY_POD_NAMESPACE:unknown}
-    pod-ip: ${MY_POD_ip:unknown}
-    redis-master-host: ${REDIS_HOST:redis-master}
-    redis-master-port: ${REDIS_PORT:6379}
-    cache:
-      default-ttl-minutes: 10
-      cacheExpirations:
-        tokenValidCache: 180
-    services:
-      todo: ${TODO_SERVICE:todo-service:8080}
-      user: ${USER_SERVICE:user-service:8080}
-    endpoints:
-      - location: http://${api.gateway.services.todo}
-        method: GET
-        path: '[/]*api/todos.*'
-        name: todo-service
-      - location: http://${api.gateway.services.user}
-        path: '[/]*api/users.*'
-        name: user-service
-      - location: http://${api.gateway.services.user}
-        path: '[/]*api/authenticate.*'
-        name: user-service
-
+app:
+  version: 1.0.0
+  environment: none
+  pod-id: ${MY_POD_NAME:unknown}
+  pod-namespace: ${MY_POD_NAMESPACE:unknown}
+  pod-ip: ${MY_POD_ip:unknown}
+  redis-master-host: ${REDIS_HOST:redis-master}
+  redis-master-port: ${REDIS_PORT:6379}
+  services:
+    todo: ${TODO_SERVICE:todo-service:8080}
+    user: ${USER_SERVICE:user-service:8080}
+  cache:
+    default-ttl-minutes: 10
+    cacheExpirations:
+      tokenValidCache: 180
+  endpoints:
+    - location: http://${app.services.todo}
+      method: GET
+      path: '[/]*api/todos.*'
+      name: todo-service
+    - location: http://${app.services.user}
+      path: '[/]*api/users.*'
+      name: user-service
+    - location: http://${app.services.user}
+      path: '[/]*api/authenticate.*'
+      name: user-service
 
 management:
   endpoints:

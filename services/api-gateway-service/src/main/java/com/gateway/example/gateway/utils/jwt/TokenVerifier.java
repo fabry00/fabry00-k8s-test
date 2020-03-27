@@ -1,6 +1,6 @@
 package com.gateway.example.gateway.utils.jwt;
 
-import com.gateway.example.config.ApiGatewayProperties;
+import com.gateway.example.config.AppProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -15,10 +15,10 @@ import java.io.IOException;
 public class TokenVerifier {
     private final String authService;
 
-    public TokenVerifier(ApiGatewayProperties properties) {
+    public TokenVerifier(AppProperties properties) {
         authService = properties.getEndpoints().stream()
                 .filter(e -> e.getPath().contains("api/authenticate"))
-                .map(ApiGatewayProperties.Endpoint::getLocation)
+                .map(AppProperties.Endpoint::getLocation)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("authenticate path not found"));
     }

@@ -2,7 +2,7 @@ package com.gateway.example.info;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gateway.example.config.ApiGatewayProperties;
+import com.gateway.example.config.AppProperties;
 import com.google.common.collect.ImmutableSet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class InfoService {
 
-    private ApiGatewayProperties properties;
+    private AppProperties properties;
 
     Set<Info.ServiceHealth> getHealth() {
         return ImmutableSet.copyOf(properties

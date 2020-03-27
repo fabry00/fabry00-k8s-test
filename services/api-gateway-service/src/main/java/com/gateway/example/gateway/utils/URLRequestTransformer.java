@@ -1,6 +1,6 @@
 package com.gateway.example.gateway.utils;
 
-import com.gateway.example.config.ApiGatewayProperties;
+import com.gateway.example.config.AppProperties;
 import lombok.AllArgsConstructor;
 import org.apache.http.client.methods.RequestBuilder;
 
@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 @AllArgsConstructor
 public class URLRequestTransformer extends ProxyRequestTransformer {
 
-    private final ApiGatewayProperties apiGatewayProperties;
+    private final AppProperties appProperties;
 
     @Override
     public RequestBuilder transform(HttpServletRequest request) throws URISyntaxException {
@@ -30,8 +30,8 @@ public class URLRequestTransformer extends ProxyRequestTransformer {
 
     private String getServiceUrl(String requestURI, HttpServletRequest httpServletRequest) {
 
-        ApiGatewayProperties.Endpoint endpoint =
-                apiGatewayProperties.getEndpoints().stream()
+        AppProperties.Endpoint endpoint =
+                appProperties.getEndpoints().stream()
                         .filter(e ->
                                 requestURI.matches(e.getPath())
                         )
